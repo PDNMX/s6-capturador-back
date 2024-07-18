@@ -17,22 +17,47 @@ class ControllerHealth {
     next();
   };
 
-  static executeQuery = async (req: Request, res: Response, next: NextFunction) => {
+  static health = async (req: Request, res: Response, next: NextFunction) => {
     const data = Health.getStatus(req);
 
-    const data2 = await Record.queryPaginate(req.body);
-
-    res.json({ data, data2 });
+    res.json(data);
   };
 
   static getAll = async (req: Request, res: Response, next: NextFunction) => {
-    const data2 = await Record.queryPaginate(req.body);
+    const data2 = await Record.query(req.body);
+
+    res.json(data2);
+  };
+
+  static getById = async (req: Request, res: Response, next: NextFunction) => {
+    const data2 = await Record.getById(req.body);
 
     res.json(data2);
   };
 
   static query = async (req: Request, res: Response, next: NextFunction) => {
     const data = await Record.query(req.body);
+
+    res.json(data);
+  };
+
+  static updateData = async (req: Request, res: Response, next: NextFunction) => {
+    const { body } = req;
+    const data = await Record.update(body);
+
+    res.json(data);
+  };
+
+  static insertData = async (req: Request, res: Response, next: NextFunction) => {
+    const { body } = req;
+    const data = await Record.insert(body);
+
+    res.json(data);
+  };
+
+  static deleteData = async (req: Request, res: Response, next: NextFunction) => {
+    const { body } = req;
+    const data = await Record.delete(body);
 
     res.json(data);
   };

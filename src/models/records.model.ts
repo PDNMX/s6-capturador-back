@@ -1,64 +1,100 @@
-import mongoose, { Document, PaginateModel, Schema } from 'mongoose';
-import mongooseService from '../common/services/mongoose.service';
+import { RecordModel, RecordModelPaginate } from './record.schema';
 import { CustomError } from '../exceptions/customError';
-import paginate from 'mongoose-paginate-v2';
 import { IQuery } from '../schemas/yup.query';
-
-let mongoo = mongooseService.getMongoose();
-
-interface IRecord extends Document {
-  id: String;
-}
-
-const recordSchema: Schema = new mongoo.Schema({
-  id: String
-});
-
-recordSchema.set('toJSON', {
-  virtuals: true
-});
-
-recordSchema.plugin(paginate);
-
-interface RecordModelPagination<T extends Document> extends PaginateModel<T> {}
-interface RecordModel<T extends Document> {}
+import { IDataUpdate, IRecord } from './record.interface';
 
 class Record {
-  private static modelPaginate: RecordModelPagination<IRecord> = mongoose.model<IRecord, mongoose.PaginateModel<IRecord>>('record', recordSchema);
-  private static recordModel = mongoose.model<IRecord>('record', recordSchema);
-
-  static queryPaginate = async (query: IQuery) => {
-    console.log('query: ', query);
-
-    const q = query.query || undefined;
-    const s = query.sort || undefined;
-    let nQuery = {};
-    let nSort = {};
-    let page = query.page || 1;
-    let nPageSize = query.pageSize || 10;
+  static getQuery = (q: IQuery) => {
+    let nQuery = q.query || {};
+    let nSort = q.sort || {};
+    let page = q.page || 1;
+    let nPageSize = q.pageSize || 10;
     let pageSize = nPageSize < 1 ? 10 : nPageSize > 200 ? 200 : nPageSize;
 
+    let ops = { page, limit: pageSize, sort: nSort, collation: { locale: 'es' } };
+
+    return { query: nQuery, options: ops };
+  };
+
+  static query = async (q: IQuery) => {
+    const { query, options } = this.getQuery(q);
+    console.log('{ query, options }: ', { query, options });
+
     try {
-      let rQuery = await this.modelPaginate.paginate(nQuery, { page, limit: pageSize, sort: nSort, collation: { locale: 'es' } }).then();
+      let rQuery = await RecordModelPaginate.paginate(query, options).then();
       return {
         pagination: { page: rQuery.page, pageSize: rQuery.limit, totalRows: rQuery.totalDocs, hasNextPage: rQuery.hasNextPage },
         results: rQuery.docs
       };
     } catch (error: object | any) {
-      console.log('error: ', error);
-      throw new CustomError('e_9002', 'Proceso de consulta fallido', error.message);
+      throw new CustomError('record_1001', '{query} Proceso de consulta fallido', error.message);
     }
   };
 
-  static query = async (query: any) => {
-    console.log('query: ', query);
+  static getById = async (req: IDataUpdate) => {
+    const recordId = req.id;
+    console.log('recordId: ', recordId);
+
     try {
-      let rQuery = await this.recordModel.find(query).exec();
-      console.log('rQuery: ', rQuery);
-      return { results: rQuery };
-    } catch (error: any) {
-      console.log('error: ', error);
-      throw new CustomError('e_9003', 'Proceso de consulta fallido', error.message);
+      let record = await RecordModel.findById(recordId);
+      if (record) {
+        return { record };
+      } else {
+        throw new CustomError('', `record_1002: El ID indicado no existe: ${req.id}`);
+      }
+    } catch (error: object | any) {
+      throw new CustomError('record_1003', '{getById} Proceso de consulta fallido', 501, error.message);
+    }
+  };
+
+  static update = async (req: IDataUpdate) => {
+    const recordId = req.id;
+
+    try {
+      let updatedRecord = await RecordModel.findByIdAndUpdate(req.id, { $set: req.data }, { new: true, runValidators: true });
+      if (updatedRecord) {
+        return { updated: updatedRecord };
+      } else {
+        throw new CustomError('', `record_1004: El ID indicado no existe: ${req.id}`);
+      }
+    } catch (error: object | any) {
+      throw new CustomError('record_1005', '{update} Proceso de consulta fallido', 501, error.message);
+    }
+  };
+
+  static insert = async (req: IDataUpdate) => {
+    const data: IRecord = req.data;
+    console.log('data: ', data);
+
+    if (!data) {
+      throw new CustomError('record_1006', '{insert} No existen datos para insertar', 501);
+    }
+
+    try {
+      let newRecord = await RecordModel.create(data);
+      if (newRecord) {
+        return { new: newRecord };
+      } else {
+        throw new CustomError('record_1007', '{insert} Error en los datos', 501);
+      }
+    } catch (error: object | any) {
+      throw new CustomError('record_1008', '{insert} Proceso de insert fallido', 501, error.message);
+    }
+  };
+
+  static delete = async (req: IDataUpdate) => {
+    const recordId = req.id;
+
+    try {
+      let deletedRecord = await RecordModel.findByIdAndDelete(recordId);
+
+      if (deletedRecord) {
+        return { deleted: deletedRecord };
+      } else {
+        throw new CustomError('', `record_1009: El ID indicado no existe: ${req.id}`);
+      }
+    } catch (error: object | any) {
+      throw new CustomError('record_1010', '{delete} Proceso de consulta fallido', 501, error.message);
     }
   };
 }
