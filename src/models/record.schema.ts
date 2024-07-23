@@ -2,12 +2,13 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import { IRecord, IRecordModelPagination } from './record.interface';
 import mongoose, { Schema } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
+import { ContractSchema } from './contracts/contract.schema';
 
 let mongoo = mongooseService.getMongoose();
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
-  nombre: String
+  contract: ContractSchema,
 });
 
 RecordSchema.set('toJSON', {
