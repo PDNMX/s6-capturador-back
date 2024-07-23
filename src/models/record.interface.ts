@@ -1,8 +1,9 @@
 import { Document, PaginateModel } from 'mongoose';
+import { IContract } from './contracts/contract.interface';
 
 export interface IRecord extends Document {
   id: String;
-  nombre: String;
+  contract: IContract;
 }
 
 export interface IDataUpdate {

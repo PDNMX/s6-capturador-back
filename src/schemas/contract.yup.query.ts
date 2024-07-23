@@ -1,27 +1,29 @@
 //import * as yup from 'yup';
 import { object, number, string, InferType, array } from "yup";
+
 export const contractData = object({
-    id: number().required("El id es obligatorio"),
-    awardID: string().required("El id de la adjudicación es obligatorio"),
-    title: string(),
-    description: string(),
-    status: string().required("El status es obligatorio"),
-    period: object({
-      startDate: string(), // .required('La fecha de inicio es obligatoria'),
-      endDate: string(),
-      durationInDays: number(),
-      maxExtentDate: string(),
-    value: object({
-      amount: number(),
-      amountNet: number(),
-      currency: string(),
-    }),
-    surveillanceMechanisms: array().of(string()),
-    dateSignedContracts: object({
-      dateSigned: string(),
-    }),
+  id: string(),
+  status: string(),
+  awardID: string(),
+  title: string(),
+  description: string(),
+  surveillanceMechanisms: string(),
+  period: object({
+    startDate: string(),
+    endDate: string(),
+    durationInDays: string(),
+    maxExtentDate: string(),
+  }),
+  value: object({
+    amount: string(),
+    amountNet: string(),
+    currency: string(),
+  }),
+  dateSignedContracts: object({
+    dateSigned: string(),
   }),
 });
+
 
 export const itemContractData = object({
   id: number().required("El id es obligatorio"),
@@ -32,14 +34,14 @@ export const itemContractData = object({
     description: string(),
     uri: string(),
   }),
-  additionalClassifications: array().of(
+/*   additionalClassifications: array().of(
     object({
       scheme: string(),
       id: string(),
       description: string(),
       uri: string(),
     })
-  ),
+  ), */
   quantity: number(),
   unit: object({
     scheme: string(),
@@ -56,12 +58,12 @@ export const itemContractData = object({
     description: string(),
     geometry: object({
       type: string(),
-      coordinates: array().of(
+      /* coordinates: array().of(
         object({
           latitude: string(),
           longitude: string(),
         })
-      ),
+      ), */
       gazetteer: object({
         scheme: string(),
         idenfiers: string(),
