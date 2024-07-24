@@ -44,7 +44,7 @@ class ControllerContracts {
     //delete req.body.id;
     //const { body } = req;
     const { body } = req;
-    console.log("body desde insertData", body );
+    console.log("body desde insertData en controllerContract", body );
     const data = await Record.insert(body);
 
     res.json(data);
