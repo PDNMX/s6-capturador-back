@@ -16,7 +16,7 @@ class ControllerAwards {
       await querySchema.validate(body);
     } catch (err: any) {
       throw new ClientError(
-        "Contracts_8001",
+        "Awards_8001",
         "Error en la consulta enviada",
         `${err.path}: ${err.errors}`
       );
@@ -57,7 +57,7 @@ class ControllerAwards {
       res.send({ messg: "todo muy bien" });
     } catch (err: any) {
       throw new ClientError(
-        "Contracts_8002",
+        "Awards_8002",
         "Error en la consulta enviada",
         `${err.path}: ${err.errors}`
       );
