@@ -8,23 +8,20 @@ const mongoo = mongooseService.getMongoose();
 export const AwardSchema: Schema = new mongoo.Schema({
   id: { type: String },
   status: { type: String },
-  awardID: { type: String },
   title: { type: String },
   description: { type: String },
-  surveillanceMechanisms: { type: String },
-  period: {
-    startDate: { type: String },
-    endDate: { type: String },
-    durationInDays: { type: String },
-    maxExtentDate: { type: String },
-  },
+  rationale: { type: String },
+
   value: {
     amount: { type: String },
-    amountNet: { type: String },
     currency: { type: String },
   },
-  dateSignedContracts: {
-    dateSigned: { type: String },
+
+  contractPeriod: {
+    startDate: { type: String },
+    endDate: { type: String },
+    maxExtentDate: { type: String },
+    durationInDays: { type: String },
   },
 });
 

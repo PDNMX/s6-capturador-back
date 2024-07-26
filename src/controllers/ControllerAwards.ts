@@ -2,6 +2,7 @@ import { AwardModel } from "./../models/awards.model";
 import { NextFunction, Request, Response } from "express";
 import { querySchema } from "../schemas/yup.query";
 import { ClientError } from "../exceptions/clientError";
+import  Record  from "../models/records.model";
 
 //import * as yup from 'yup';
 import { AwardData } from "../schemas/awards.yup.query";
@@ -40,6 +41,18 @@ class ControllerAwards {
     });
   };
 
+  static query = async (req: Request, res: Response, next: NextFunction) => {
+    const data = await Record.query(req.body);
+
+    res.json(data);
+  };
+
+  static getById = async (req: Request, res: Response, next: NextFunction) => {
+    const data = await Record.getById(req.body);
+
+    res.json(data);
+  };
+
   static insertAward = async (
     req: Request,
     res: Response,
@@ -67,5 +80,12 @@ class ControllerAwards {
     /* const data = await ContractModel.insertContract(req);
     res.json(data); */
   };
+  static updateData = async (req: Request, res: Response, next: NextFunction) => {
+    const { body } = req;
+    const data = await Record.update(body);
+
+    res.json(data);
+  };
+  
 }
 export default ControllerAwards;
