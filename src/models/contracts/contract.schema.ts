@@ -19,14 +19,14 @@ export const ContractSchema: Schema = new mongoo.Schema({
     maxExtentDate: { type: String },
   },
   value: {
-    amount: { type: String },
+    amount: { type: Number },
     amountNet: { type: String },
     currency: { type: String },
   },
   dateSignedContracts: {
     dateSigned: { type: String },
-  },
-});
+  }},{strict:false}
+);
 
 /* ContractSchema.plugin(mongoosePaginate);
 
