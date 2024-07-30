@@ -1,29 +1,27 @@
 import { object, number, string, InferType, array, date } from "yup";
 export const AwardData = object({
-  id: number().required("El id es obligatorio"),
-  status: string().required("El estado de la adjudicación es obligatorio"),
-  title: string().required("El título es obligatorio"),
+  id: number(),
+  status: string(),
+  title: string(),
   description: string(),
-  rationale: string().required(
-    "La justificación de la adjudicación es obligatoria"
-  ),
-  date: date().required("La fecha1 es obligatoria"),
+  rationale: string(),
+  date: date(),
   value: object({
-    amount: number().required("El valor es obligatorio"),
-    currency: string().required("La moneda es obligatoria"),
+    amount: number(),
+    currency: string(),
   }),
   contractPeriod: object({
-    startDate: date().required("La fecha inicial es obligatoria"),
-    endDate: date().required("La fecha final es obligatoria"),
-    maxExtentDate: date().required("La fecha máxima es obligatoria"),
+    startDate: date(),
+    endDate: date(),
+    maxExtentDate: date(),
     durationInDays: number(),
   }),
   suppliers: array().of(object({ id: string(), name: string() })),
   items: array().of(
     object({
       id: string(),
-      description: string().required("La descripción del item es obligatoria"),
-      quantity: number().required("La cantidad es obligatoria"),
+      description: string(),
+      quantity: number(),
       unit: object({
         id: string(),
         scheme: string(),
@@ -38,14 +36,14 @@ export const AwardData = object({
         id: string(),
         description: string(),
         scheme: string(),
-        uri: string().url().required("El uri es obligatorio"),
+        uri: string().url(),
       }),
       additionalClassifications: array().of(
         object({
           id: string(),
           description: string(),
           scheme: string(),
-          uri: string().url().required("El uri es obligatorio"),
+          uri: string().url(),
         }),
       ), 
     })

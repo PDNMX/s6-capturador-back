@@ -1,18 +1,18 @@
 export interface IAward {
-  id: string;
+  id: number;
   status: string;
   title: string;
   description: string;
   rationale: string;
-  date: string;
+  date: Date;
   value: {
-    amount: string;
+    amount: number;
     currency: string;
   };
   contractPeriod: {
-    startDate: string;
-    endDate: string;
-    maxExtentDate: string;
-    durationInDays: string;
+    startDate: Date;
+    endDate: Date;
+    maxExtentDate: Date;
+    durationInDays: number;
   };
 }

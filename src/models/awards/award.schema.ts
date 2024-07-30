@@ -6,22 +6,22 @@ import { IAward } from "./award.interface";
 const mongoo = mongooseService.getMongoose();
 
 export const AwardSchema: Schema = new mongoo.Schema({
-  id: { type: String },
+  id: { type: Number },
   status: { type: String },
   title: { type: String },
   description: { type: String },
   rationale: { type: String },
-
+  date: { type: Date },
   value: {
-    amount: { type: String },
+    amount: { type: Number },
     currency: { type: String },
   },
 
   contractPeriod: {
-    startDate: { type: String },
-    endDate: { type: String },
-    maxExtentDate: { type: String },
-    durationInDays: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
+    maxExtentDate: { type: Date },
+    durationInDays: { type: Number },
   },
 });
 
