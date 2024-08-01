@@ -1,4 +1,3 @@
-import { number } from "yup";
 export interface IAward {
   id: number;
   status: string;

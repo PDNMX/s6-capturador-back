@@ -54,6 +54,29 @@ export const AwardSchema: Schema = new mongoo.Schema({
       },
     },
   ],
+  documents: [
+    {
+      id: { type: String },
+      documentType: { type: String },
+      title: { type: String },
+      description: { type: String },
+      url: { type: String },
+      datePublished: { type: Date },
+      dateModified: { type: Date },
+      format: { type: String },
+      language: { type: String },
+    },
+  ],
+  amendments: [
+    {
+      date: { type: Date },
+      rationale: { type: String },
+      id: { type: String },
+      description: { type: String },
+      amendsReleaseID: { type: String },
+      releaseID: { type: String },
+    },
+  ],
 });
 
 /* ContractSchema.plugin(mongoosePaginate);
