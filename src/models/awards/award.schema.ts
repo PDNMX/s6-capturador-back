@@ -16,13 +16,13 @@ export const AwardSchema: Schema = new mongoo.Schema({
     amount: { type: Number },
     currency: { type: String },
   },
-
   contractPeriod: {
     startDate: { type: Date },
     endDate: { type: Date },
     maxExtentDate: { type: Date },
     durationInDays: { type: Number },
   },
+  suppliers:[ { id: { type: String }, name: { type: String } }], 
 });
 
 /* ContractSchema.plugin(mongoosePaginate);

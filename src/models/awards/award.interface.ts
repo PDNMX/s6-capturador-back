@@ -15,4 +15,8 @@ export interface IAward {
     maxExtentDate: Date;
     durationInDays: number;
   };
+  suppliers: {
+    name: string;
+    id: string;
+  }[],
 }
