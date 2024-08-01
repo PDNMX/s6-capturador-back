@@ -22,7 +22,38 @@ export const AwardSchema: Schema = new mongoo.Schema({
     maxExtentDate: { type: Date },
     durationInDays: { type: Number },
   },
-  suppliers:[ { id: { type: String }, name: { type: String } }], 
+  suppliers: [{ id: { type: String }, name: { type: String } }],
+  items: [
+    {
+      id: { type: String },
+      description: { type: String },
+      classification: {
+        id: { type: String },
+        description: { type: String },
+        scheme: { type: String },
+        uri: { type: String },
+      },
+      additionalClassifications: [
+        {
+          scheme: { type: String },
+          id: { type: String },
+          description: { type: String },
+          uri: { type: String },
+        },
+      ],
+      quantity: { type: Number },
+      unit: {
+        scheme: { type: String },
+        id: { type: String },
+        name: { type: String },
+        value: {
+          amount: { type: Number },
+          currency: { type: String },
+        },
+        uri: { type: String },
+      },
+    },
+  ],
 });
 
 /* ContractSchema.plugin(mongoosePaginate);

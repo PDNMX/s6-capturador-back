@@ -1,3 +1,4 @@
+import { number } from "yup";
 export interface IAward {
   id: number;
   status: string;
@@ -18,5 +19,32 @@ export interface IAward {
   suppliers: {
     name: string;
     id: string;
-  }[],
+  }[];
+  items: {
+    id: string;
+    description: string;
+    classification: {
+      id: string;
+      description: string;
+      scheme: string;
+      uri: string;
+    };
+    additionalClassifications: {
+      scheme: string;
+      id: string;
+      description: string;
+      uri: string;
+    }[];
+    quantity: number;
+    unit: {
+      scheme: string;
+      id: string;
+      name: string;
+      value: {
+        amount: number;
+        currency: string;
+      };
+      uri: string;
+    };
+  }[];
 }
