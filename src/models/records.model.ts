@@ -30,28 +30,8 @@ class Record {
       throw new CustomError('record_1001', '{query} Proceso de consulta fallido', error.message);
     }
   };
-
+  
   static getById = async (req: IDataUpdate) => {
-    const recordId = req.id;
-    console.log('recordId: ', recordId);
-  
-    try {
-      let record = await RecordModel.findById(recordId);
-      if (record) {
-        return { exists: true, record };
-      } else {
-        return { exists: false, record: null };
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new CustomError('record_1003', '{getById} Proceso de consulta fallido', 501, error.message);
-      } else {
-        throw new CustomError('record_1003', '{getById} Proceso de consulta fallido', 501, 'Error desconocido');
-      }
-    }
-  };
-  
-/*   static getById = async (req: IDataUpdate) => {
     const recordId = req.id;
     console.log('recordId: ', recordId);
 
@@ -66,7 +46,7 @@ class Record {
       throw new CustomError('record_1003', '{getById} Proceso de consulta fallido', 501, error.message);
     }
   };
- */
+
   static update = async (req: IDataUpdate) => {
     const recordId = req.id;
 
