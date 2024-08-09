@@ -8,8 +8,9 @@ const app = express();
 app.use(json());
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*'); // Considera restringir esto a tu dominio específico en producción
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
+    //res.header('Access-Control-Allow-Methods', 'POST'); => cambiar por la siguiente linea
     res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE');
     res.header('Access-Control-Expose-Headers', 'Content-Length');
     res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');

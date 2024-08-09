@@ -1,10 +1,11 @@
 export interface IContract {
-  id: string;
+ contract:{
+   id: string;
   awardID: string;
   title: string;
   description: string;
   status: string;
-  surveillanceMechanisms:[i0];
+  surveillanceMechanisms:[string];
   period: {
     startDate: string;
     endDate: string;
@@ -75,5 +76,6 @@ export interface IContract {
     dueDate: string;
     dateMet: string;
   };
+}
   
 }

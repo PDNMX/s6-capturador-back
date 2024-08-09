@@ -1,12 +1,11 @@
 import mongoose, { Schema } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
+//import mongoosePaginate from "mongoose-paginate-v2";
 import mongooseService from "../../common/services/mongoose.service";
-import { IContract } from "./contract.interface";
+//import { IContract } from "./contract.interface";
 
 const mongoo = mongooseService.getMongoose();
 
-export const ContractSchema: Schema = new mongoo.Schema({
-  id: { type: String },
+export const ContractGeneralSchema: Schema = new mongoo.Schema({
   status: { type: String },
   awardID: { type: String },
   title: { type: String },
@@ -25,8 +24,19 @@ export const ContractSchema: Schema = new mongoo.Schema({
   },
   dateSignedContracts: {
     dateSigned: { type: String },
-  }},{strict:false}
+  }
+
+});
+
+export const ContractSchema: Schema = new mongoo.Schema({
+    contract: { 
+      /* Cambiar por esquemas correspondientes a las secciones */
+      type: Schema.Types.Mixed,
+      //type: ContractGeneralSchema,
+     },
+},{strict:false}
 );
+
 
 /* ContractSchema.plugin(mongoosePaginate);
 
