@@ -3,7 +3,7 @@ import { IContract } from './contracts/contract.interface';
 
 export interface IRecord extends Document {
   id: String;
-  contract: IContract;
+  contracts: IContract[];
 }
 
 export interface IDataUpdate {

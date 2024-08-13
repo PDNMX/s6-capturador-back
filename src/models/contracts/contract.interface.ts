@@ -1,81 +1,80 @@
 export interface IContract {
- contract:{
-   id: string;
-  awardID: string;
-  title: string;
-  description: string;
-  status: string;
-  surveillanceMechanisms:[string];
-  period: {
-    startDate: string;
-    endDate: string;
-    durationInDays: string;
-    maxExtentDate: string;
+  _id?: any;
+   id?: any;
+  awardID?: any;
+  title?: any;
+  description?: any;
+  status?: any;
+  surveillanceMechanisms?:[any];
+  period?: {
+    startDate: any;
+    endDate: any;
+    durationInDays: any;
+    maxExtentDate: any;
   };
-  value: {
-    amount: number;
-    amountNet: string;
-    currency: string;
+  value?: {
+    amount: any;
+    amountNet: any;
+    currency: any;
   };
-  dateSignedContracts: {
-    dateSigned: string;
+  dateSignedContracts?: {
+    dateSigned: any;
   };
-  Items: [{
-    id: string;
-    description: string;
+  Items?: {
+    id: any;
+    description: any;
     classification: {
-      scheme: string;
-      id: string;
-      description: string;
+      scheme: any;
+      id: any;
+      description: any;
     };
     quantity: number;
     unit: {
-      name: string;
+      name: any;
       value: {
         amount: number;
-        currency: string;
+        currency: any;
       };
     };
     deliveryLocation: {
-      latitude: string;
-      longitude: string;
+      latitude: any;
+      longitude: any;
     };
-  }];
-  documents: {
-    id: string;
-    documentType: string;
-    title: string;
-    description: string;
-    url: string;
-    datePublished: string;
   };
-  guarantees: {
-    id: string;
-    description: string;
+  documents?: {
+    id: any;
+    documentType: any;
+    title: any;
+    description: any;
+    url: any;
+    datePublished: any;
+  };
+  guarantees?: {
+    id: any;
+    description: any;
     amount: number;
-    currency: string;
-    dateFrom: string;
-    dateTo: string;
+    currency: any;
+    dateFrom: any;
+    dateTo: any;
   };
-  relatedProcesses: {
-    id: string;
-    relationship: string;
-    title: string;
+  relatedProcesses?: {
+    id: any;
+    relationship: any;
+    title: any;
   };
-  amendments: {
-    id: string;
-    date: string;
-    rationale: string;
-    amendsReleaseID: string;
-    releaseID: string;
+  amendments?: {
+    id: any;
+    date: any;
+    rationale: any;
+    amendsReleaseID: any;
+    releaseID: any;
   };
-  milestones: {
-    id: string;
-    title: string;
-    description: string;
-    dueDate: string;
-    dateMet: string;
+  milestones?: {
+    id: any;
+    title: any;
+    description: any;
+    dueDate: any;
+    dateMet: any;
   };
-}
   
 }

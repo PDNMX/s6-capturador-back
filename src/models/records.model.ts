@@ -49,9 +49,9 @@ class Record {
 
   static update = async (req: IDataUpdate) => {
     const recordId = req.id;
-
+    const data: IRecord = req.data;
     try {
-      let updatedRecord = await RecordModel.findByIdAndUpdate(req.id, { $set: req.data }, { new: true, runValidators: true });
+      let updatedRecord = await RecordModel.findByIdAndUpdate(recordId, { $set: data }, { new: true, runValidators: true });
       if (updatedRecord) {
         return { updated: updatedRecord };
       } else {

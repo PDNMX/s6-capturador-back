@@ -146,8 +146,9 @@ class ControllerContracts {
  */
 
   static updateData = async (req: Request, res: Response, next: NextFunction) => {
+    console.log("body desde updateData en controllerContract", req.body );
     const { body } = req;
-    const data = await Record.update(body);
+       const data = await Record.update(body);
 
     res.json(data);
   };
