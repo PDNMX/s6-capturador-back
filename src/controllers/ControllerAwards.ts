@@ -2,6 +2,7 @@ import { AwardModel } from "./../models/awards.model";
 import { NextFunction, Request, Response } from "express";
 import { querySchema } from "../schemas/yup.query";
 import { ClientError } from "../exceptions/clientError";
+import Record from "../models/records.model";
 
 //import * as yup from 'yup';
 import { AwardData } from "../schemas/awards.yup.query";
@@ -40,32 +41,50 @@ class ControllerAwards {
     });
   };
 
+  static query = async (req: Request, res: Response, next: NextFunction) => {
+    const data = await Record.query(req.body);
+
+    res.json(data);
+  };
+
+  static getAll = async (req: Request, res: Response, next: NextFunction) => {
+    const { body } = req;
+    const id = body.id;
+    delete body.id;
+
+    const data = await Record.query(req.body);
+
+    res.json(data);
+  };
+
+  static getById = async (req: Request, res: Response, next: NextFunction) => {
+    const data = await Record.getById(req.body);
+
+    res.json(data);
+  };
+
   static insertAward = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    /*     const contractValueData = {
-      value: {
-        amount: 1000+1,
-        currency: ['USD'],
-      },
-    }; */
-    const awardValueData = req.body;
-    try {
-      await AwardData.validate(awardValueData);
-      res.send({ messg: "todo muy bien" });
-    } catch (err: any) {
-      throw new ClientError(
-        "Awards_8002",
-        "Error en la consulta enviada",
-        `${err.path}: ${err.errors}`
-      );
-      res.send({ status: "chale" });
-    }
+    const { body } = req;
+    console.log("body desde insertAward", body);
+    const data = await Record.insert(body);
+    res.json(data);
 
     /* const data = await ContractModel.insertContract(req);
     res.json(data); */
+  };
+  static updateData = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { body } = req;
+    const data = await Record.update(body);
+
+    res.json(data);
   };
 }
 export default ControllerAwards;

@@ -3,12 +3,14 @@ import { IRecord, IRecordModelPagination } from './record.interface';
 import mongoose, { Schema } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
+import { AwardSchema } from './awards/award.schema';
 
 let mongoo = mongooseService.getMongoose();
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
   contract: ContractSchema,
+  award: AwardSchema,
 });
 
 RecordSchema.set('toJSON', {
