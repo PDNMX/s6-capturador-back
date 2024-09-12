@@ -4,13 +4,15 @@ import mongoose, { Schema } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
 import { MetadataSchema } from './metadata/metadata.schema';
+import { AwardSchema } from './awards/award.schema';
 
 let mongoo = mongooseService.getMongoose();
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
   metadata: MetadataSchema,
-  contract: ContractSchema
+  contract: ContractSchema,
+  award: AwardSchema,
 });
 
 RecordSchema.set('toJSON', {
