@@ -3,6 +3,8 @@ import { IRecord, IRecordModelPagination } from './record.interface';
 import mongoose, { Schema } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
+import { MetadataSchema } from './metadata/metadata.schema';
+import { AwardSchema } from './awards/award.schema';
 
 let mongoo = mongooseService.getMongoose();
 
@@ -110,7 +112,10 @@ let mongoo = mongooseService.getMongoose();
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
-    contracts: [ContractSchema]
+    contracts: [ContractSchema],
+  metadata: MetadataSchema,
+  //contract: ContractSchema,
+  award: AwardSchema,
 });
 
 RecordSchema.set('toJSON', {
