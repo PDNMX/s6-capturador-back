@@ -63,28 +63,21 @@ class ControllerAwards {
     res.json(data);
   };
 
-  static insertAward = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  static insertAward = async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
-    console.log("body desde insertAward", body);
-    const data = await Record.insert(body);
+    const data = await Record.insert(body); // Utiliza el modelo Record para insertar los datos de la seccion awards a la base de datos
     res.json(data);
-
-    /* const data = await ContractModel.insertContract(req);
-    res.json(data); */
   };
-  static updateData = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+
+    /**
+   * Actualiza un registro de premio existente en la base de datos.
+   * @param req - Objeto de solicitud Express que contiene los datos actualizados de awards en el cuerpo (body).
+   * @param res - Objeto de respuesta Express para enviar el resultado al cliente.
+   */
+  static updateData = async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
     const data = await Record.update(body);
-
-    res.json(data);
+    res.json(data); // envia los datos actualizados
   };
 }
 export default ControllerAwards;
