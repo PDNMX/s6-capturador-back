@@ -5,6 +5,7 @@ import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
 import { MetadataSchema } from './metadata/metadata.schema';
 import { AwardSchema } from './awards/award.schema';
+import { TenderSchema } from './tenders/tender.schema';
 
 let mongoo = mongooseService.getMongoose();
 
@@ -116,6 +117,7 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   metadata: MetadataSchema,
   //contract: ContractSchema,
   award: AwardSchema,
+  tender: TenderSchema
 });
 
 RecordSchema.set('toJSON', {
