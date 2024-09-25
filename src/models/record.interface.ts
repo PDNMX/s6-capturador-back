@@ -2,12 +2,14 @@ import { Document, PaginateModel } from 'mongoose';
 import { IContract } from './contracts/contract.interface';
 import { IMetadata } from './metadata/metadata.interface';
 import { IAward } from './awards/award.interface';
+import { ITender } from './tenders/tender.interface';
 
 export interface IRecord extends Document {
   id: String;
   metadata: IMetadata;
   contract: IContract;
-  award:IAward;
+  award: IAward;
+  tender: ITender;
 }
 
 export interface IDataUpdate {
