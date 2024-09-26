@@ -1,6 +1,6 @@
 import { Request } from "express";
 
-export class PlanningModel {
+export class Planning {
 
     static getStatus(req:Request): {status:string; reqBody:any }{
         return {status:'ok', reqBody: req.body };
@@ -10,3 +10,5 @@ export class PlanningModel {
         return { status: 'ok', reqBody: req.body };
     }
 }
+
+export default Planning;
