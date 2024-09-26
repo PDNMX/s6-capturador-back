@@ -30,87 +30,23 @@ class ControllerTender {
   static addTender = async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
 
-    const record = await Record.getById({ id, data: null });
+    // const doc = await Record.getById({ id, data: null });
+    // const oldTender = JSON.parse(JSON.stringify(doc.record.tender));
+    const tenderData = JSON.parse(JSON.stringify(req.body));
 
-    const data = { tender: req.body };
+    if (tenderData.tenderers.length !== 0) {
+      tenderData.numberOfTenderers = tenderData.tenderers.length;
+    }
 
-    const newRecord = await Record.update({ id, data });
+    // const newTender = { ...oldTender, ...tenderData };
 
-    res.json({ record, id, data, newRecord });
+    // const data = await Record.update({ id, data: { tender: newTender } });
+    const data = await Record.update({ id, data: { tender: tenderData } });
+
+    res.json(data);
   };
 
   // extra
-
-  static health = async (req: Request, res: Response, next: NextFunction) => {
-    const data = Health.getStatus(req);
-
-    res.json(data);
-  };
-
-  static getAll = async (req: Request, res: Response, next: NextFunction) => {
-    const data2 = await Record.query(req.body);
-
-    res.json(data2);
-  };
-
-  static deleteRecord = async (req: Request, res: Response, next: NextFunction) => {
-    const id = req.params.id;
-
-    try {
-      await Record.delete({ id, data: {} });
-      res.json({ err: false, delete: true });
-    } catch (error) {
-      res.json({ err: true, error });
-    }
-  };
-
-  static addRecord = async (req: Request, res: Response, next: NextFunction) => {
-    const newRecord = {
-      id: '',
-      metadata: {
-        canDelete: true
-      }
-    };
-
-    try {
-      const data = await Record.insert({ id: '', data: newRecord });
-      res.json({ err: false, data: data.new });
-    } catch (error) {
-      res.json({ err: true, error });
-    }
-  };
-
-  static getById = async (req: Request, res: Response, next: NextFunction) => {
-    const data2 = await Record.getById(req.body);
-
-    res.json(data2);
-  };
-
-  static query = async (req: Request, res: Response, next: NextFunction) => {
-    const data = await Record.query(req.body);
-
-    res.json(data);
-  };
-
-  static updateData = async (req: Request, res: Response, next: NextFunction) => {
-    const { body } = req;
-    const data = await Record.update(body);
-
-    res.json(data);
-  };
-
-  static insertData = async (req: Request, res: Response, next: NextFunction) => {
-    const { body } = req;
-    const data = await Record.insert(body);
-
-    res.json(data);
-  };
-
-  static deleteData = async (req: Request, res: Response, next: NextFunction) => {
-    const { body } = req;
-    const data = await Record.delete(body);
-
-    res.json(data);
-  };
 }
+
 export default ControllerTender;
