@@ -5,7 +5,8 @@ import { IAward } from './awards/award.interface';
 import { ITender } from './tenders/tender.interface';
 
 export interface IRecord extends Document {
-  id: String;
+  ocid: string;
+  id: string;
   metadata: IMetadata;
   contract: IContract;
   award: IAward;

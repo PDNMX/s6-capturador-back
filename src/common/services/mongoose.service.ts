@@ -10,8 +10,8 @@ class MongooseService {
     private url = `mongodb://${user}:${pass}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${authSource}`;
 
     private mongooseOptions = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000,
         autoIndex: false, // Don't build indexes        
     };
