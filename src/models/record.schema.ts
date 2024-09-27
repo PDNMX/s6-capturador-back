@@ -1,13 +1,15 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { IRecord, IRecordModelPagination } from './record.interface';
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
 import { MetadataSchema } from './metadata/metadata.schema';
 import { AwardSchema } from './awards/award.schema';
 import { TenderSchema } from './tenders/tender.schema';
+import config from '../config';
 
 let mongoo = mongooseService.getMongoose();
+let ocid = config.ocid;
 
 /* const ContractGeneralSchema: Schema = new mongoo.Schema({
   id: String,
@@ -113,7 +115,11 @@ let mongoo = mongooseService.getMongoose();
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
-    contracts: [ContractSchema],
+  contracts: [ContractSchema],
+  ocid: {
+    type: String,
+    default: () => `${ocid}-${new Types.ObjectId().toString()}`
+  },
   metadata: MetadataSchema,
   //contract: ContractSchema,
   award: AwardSchema,

@@ -17,14 +17,13 @@ class ControllerTender {
     next();
   };
 
-  static getByID = async (req: Request, res: Response, next: NextFunction) => {
+  static getByID = async (req: Request, res: Response) => {
     const id = req.params.id;
     const data = await Record.getById({ id, data: null });
 
     const tender = data.record.tender || null;
 
-    console.log('id: ', id);
-    res.json({ id, data, tender });
+    res.json({ tender });
   };
 
   static addTender = async (req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +32,7 @@ class ControllerTender {
     // const doc = await Record.getById({ id, data: null });
     // const oldTender = JSON.parse(JSON.stringify(doc.record.tender));
     const tenderData = JSON.parse(JSON.stringify(req.body));
+    console.log('tenderData: ', tenderData);
 
     if (tenderData.tenderers.length !== 0) {
       tenderData.numberOfTenderers = tenderData.tenderers.length;
