@@ -15,7 +15,7 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
   ocid: {
     type: String,
-    default: `${ocid}-${new Types.ObjectId().toString()}`
+    default: () => `${ocid}-${new Types.ObjectId().toString()}`
   },
   metadata: MetadataSchema,
   contract: ContractSchema,
