@@ -10,7 +10,6 @@ import config from '../config';
 
 let mongoo = mongooseService.getMongoose();
 let ocid = config.ocid;
-console.log('ocid: ', ocid);
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
