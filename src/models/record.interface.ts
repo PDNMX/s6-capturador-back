@@ -9,7 +9,7 @@ export interface IRecord extends Document {
   id: string;
   metadata: IMetadata;
   contract: IContract;
-  award: IAward;
+  awards: IAward;
   tender: ITender;
 }
 

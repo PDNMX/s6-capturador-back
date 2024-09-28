@@ -60,9 +60,9 @@ class ControllerAwards {
   static getById = async (req: Request, res: Response) => {
     const id = req.params.id;
     const data = await Record.getById({ id, data: null });
-    const award = data.record.award || null;
+    const awards = data.record.awards || null;
 
-    res.json({ award });
+    res.json({ awards });
   };
 
   static addAward = async (req: Request, res: Response, next: NextFunction) => {
@@ -75,7 +75,7 @@ class ControllerAwards {
       awardData.numberOfSuppliers = awardData.suppliers.length;
     }
 
-    const data = await Record.update({ id, data: { award: awardData } });
+    const data = await Record.update({ id, data: { awards: awardData } });
     res.json(data);
   };
 
