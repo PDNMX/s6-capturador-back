@@ -19,7 +19,7 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   },
   metadata: MetadataSchema,
   contract: ContractSchema,
-  awards: AwardSchema,
+  awards: [AwardSchema],
   tender: TenderSchema
 });
 
