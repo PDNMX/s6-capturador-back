@@ -60,7 +60,7 @@ class ControllerAwards {
   static getById = async (req: Request, res: Response) => {
     const id = req.params.id;
     const data = await Record.getById({ id, data: null });
-    const awards = data.record.awards || null;
+    const awards = data.record.award || null;
 
     res.json({ awards });
   };
