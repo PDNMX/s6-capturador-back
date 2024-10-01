@@ -1,205 +1,314 @@
-import mongoose, { Schema } from "mongoose";
-import mongoosePagination from "mongoose-paginate-v2";
+import { Schema, Types } from "mongoose";
 import mongooseService from "../../common/services/mongoose.service";
+
+
 import { IPlanning } from "./planning.interface";
 import { date } from "yup";
 
 const mongoo = mongooseService.getMongoose();
-const Mixed = Schema.Types.Mixed;
 
-export const PlanningSchema = new mongoo.Schema({
-    rationale: { type: Mixed },
-    hasQuotes: { type: Mixed },
-    requestingUnits: [
-        {
-            id: { type: Mixed },
-            name: { type: Mixed },
-        }
-    ],
-    responsibleUnits: [
-        {
-            id: { type: Mixed },
-            name: { type: Mixed },
-        }
-    ],
-    contractingUnits: [
-        {
-            id: { type: Mixed },
-            name: { type: Mixed },
-        }
-    ],
-    requestForQuotes : [
-        {
-            id: {type: Mixed},
-            title: {type: Mixed},
-            description: {type: Mixed},
-            period: {
-                startDate: { type: String },
-                endDate: { type: String },
-                durationInDays: { type: String },
-                maxExtentDate: { type: String },
-            },
-            items: [
-                {
-                    id: { type: Mixed },
-                    description: { type: Mixed },
-                    classification: {
-                        scheme: { type: Mixed },
-                        id: { type: Mixed },
-                        description: { type: Mixed },
-                        uri: { type: Mixed },
-                    },
-                    additionalClassifications: [
-                        {
-                            scheme: { type: Mixed },
-                            id: { type: Mixed },
-                            description: { type: Mixed },
-                            uri: { type: Mixed },
-                        },
-                    ],
-                    quantity: { type: Mixed },
-                    unit: {
-                        scheme: { type: Mixed },
-                        id: { type: Mixed },
-                        name: { type: Mixed },
-                        value: {
-                            amount: { type: Mixed },
-                            currency: { type: Mixed },
-                        },
-                        uri: { type: Mixed },
-                    },
-                },
-            ],
-            inviteSuppliers: [
-                {
-                    name: { type: Mixed },
-                    id: { type: Mixed },
-                }
-            ],
-            quotes: [
-                {
-                    id: { type: Mixed },
-                    descripition: { type: Mixed },
-                    date: { type: Mixed },
-                    items: [
-                        {
-                            id: { type: Mixed },
-                            description: { type: Mixed },
-                            classification: {
-                                scheme: { type: Mixed },
-                                id: { type: Mixed },
-                                description: { type: Mixed },
-                                uri: { type: Mixed },
-                            },
-                            additionalClassifications: [
-                                {
-                                    scheme: { type: Mixed },
-                                    id: { type: Mixed },
-                                    description: { type: Mixed },
-                                    uri: { type: Mixed },
-                                },
-                            ],
-                            quantity: { type: Mixed },
-                            unit: {
-                                scheme: { type: Mixed },
-                                id: { type: Mixed },
-                                name: { type: Mixed },
-                                value: {
-                                    amount: { type: Mixed },
-                                    currency: { type: Mixed },
-                                },
-                                uri: { type: Mixed },
-                            },
-                        },
-                    ],
-                    value: {
-                        amount: { type: Mixed },
-                        currency: { type: Mixed },
-                    },
-                    period: {
-                        startDate: { type: String },
-                        endDate: { type: String },
-                        durationInDays: { type: String },
-                        maxExtentDate: { type: String },
-                    },
-                    issuingSupplier: {
-                        name: { type: Mixed },
-                        id: { type: Mixed },
-                    },
-                }
-            ],            
-        }
-    ],
-    budget: {
-        id: { type: Mixed },
-        description: { type: Mixed },
-        value: {
-            amount: { type: Mixed },
-            currency: { type: Mixed },
+//const Mixed = Schema.Types.Mixed;
+
+const MilestoneSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
         },
-        project: { type: Mixed },
-        projectID: { type: Mixed },
-        uri: { type: Mixed },
+        title: String,
+        type: String,
+        description: String,
+        code: String,
+        dueDate: String,
+        dateMet: String,
+        dateModified: String,
+        status: String
+    },
+    { _id: false }
+);
+
+const DocumentsSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        documentType: String,
+        title: String,
+        description: String,
+        url: String,
+        datePublished: String,
+        dateModified: String,
+        format: String,
+        languaje: String
+    },
+    { _id: false }
+);
+
+  const BudgetSchema: Schema = new mongoo.Schema(    
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        description: String,
+        value: {
+            amount: String,
+            currency: String
+        },
+        project: String,
+        projectID: String,
+        uri: String,
         budgetBreakdown: [
             {
-                id: { type: Mixed },
-                description: { type: Mixed },
-                amount: {
-                    amount: { type: Mixed },
-                    currency: { type: Mixed },
+                id: {
+                    type: String,
+                    default: new Types.ObjectId().toString()
                 },
-                uri: { type: Mixed },
-                period: {
-                    startDate: { type: String },
-                    endDate: { type: String },
-                    durationInDays: { type: String },
-                    maxExtentDate: { type: String },
+                description: String,
+                amount: {
+                    amount: String,                    
+                    currency: String
+                },
+                uri: String,
+                period: {                    
+                    startDate: String,
+                    endDate: String,
+                    durationInDays: String,
+                    maxExtentDate: String
                 },
                 budgetLines: [
                     {
-                        id: { type: Mixed },
-                        origin: { type: Mixed },
+                        id: {
+                            type: String,
+                            default: new Types.ObjectId().toString()
+                        },
+                        origin: String,
                         components: [
                             {
-                                name: { type: Mixed },
-                                level: { type: Mixed },
-                                code: { type: Mixed },
-                                description: { type: Mixed },
-                            },
-                        ],
+                                name: String,
+                                level: String,
+                                code: String,
+                                description: String
+                            }
+                        ]
                     }
                 ],
                 sourceParty: {
-                    name: { type: Mixed },
-                    id: { type: Mixed },
+                    name: String,
+                    id: String
+                }
+            }
+        ]
+    },
+    { _id: false }
+);
+
+const RequestingUnitsSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        name: String
+    },
+    { _id: false }
+);
+
+const ResponsibleUnitsSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        name: String
+    },
+    { _id: false }
+);
+
+const ContractingUnitsSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        name: String
+    },
+    { _id: false }
+);
+
+const RequestForQuotesSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
+        },
+        title: String,
+        description: String,
+        period: {
+            startDate: String,
+            endDate: String,
+            durationInDays: String,
+            maxExtentDate: String
+        },
+        items: [
+            {
+                id: {
+                    type: String,
+                    default: new Types.ObjectId().toString()
                 },
+                description: String,
+                classification: {
+                    scheme: String,
+                    id: String,
+                    description: String,
+                    uri: String
+                },
+                additionalClassifications: [
+                    {
+                        scheme: String,
+                        id: String,
+                        description: String,
+                        uri: String
+                    }
+                ],
+                quantity: String,
+                unit: {
+                    scheme: String,
+                    id: String,
+                    name: String,
+                    value: {
+                        amount: String,
+                        currency: String
+                    },
+                    uri: String
+                }
             }
         ],
+        inviteSuppliers: [
+            {
+                name: String,
+                id: String
+            }
+        ],
+        quotes: [
+            {
+                id: {
+                    type: String,
+                    default: new Types.ObjectId().toString()
+                },
+                descripition: String,
+                date: String,
+                items: [
+                    {
+                        id: {
+                            type: String,
+                            default: new Types.ObjectId().toString()
+                        },
+                        description: String,
+                        classification: {
+                            scheme: String,
+                            id: String,
+                            description: String,
+                            uri: String
+                        },
+                        additionalClassifications: [
+                            {
+                                scheme: String,
+                                id: String,
+                                description: String,
+                                uri: String
+                            }
+                        ],
+                        quantity: String,
+                        unit: {
+                            scheme: String,
+                            id: String,
+                            name: String,
+                            value: {
+                                amount: String,
+                                currency: String
+                            },
+                            uri: String
+                        }
+                    }
+                ],
+                value: {
+                    amount: String,
+                    currency: String
+                },
+                period: {
+                    startDate: String,
+                    endDate: String,
+                    durationInDays: String,
+                    maxExtentDate: String
+                },
+                issuingSupplier: {
+                    name: String,
+                    id: String
+                }
+            }
+        ]
     },
-    documents: [
-        {
-            id: { type: Mixed },
-            documentType: { type: Mixed },
-            title: { type: Mixed },
-            description: { type: Mixed },
-            url: { type: Mixed },
-            datePublished: { type: Mixed },
-            dateModified: { type: Mixed },
-            format: { type: Mixed },
-            language: { type: Mixed },
+    { _id: false }
+);
+
+const BudgetBreakdownSchema: Schema = new mongoo.Schema(
+    {
+        id: {
+            type: String,
+            default: new Types.ObjectId().toString()
         },
-    ],
-    milestones: [
-        {
-            id: { type: Mixed },
-            title: { type: Mixed },
-            type: { type: Mixed },
-            description: { type: Mixed },
-            code: { type: Mixed },
-            dueDate: { type: Mixed },
-            dateMet: { type: Mixed },
-            dateModified: { type: Mixed },
-            status: { type: Mixed },
+        description: String,
+        amount: {
+            amount: String,
+            currency: String
         },
-    ],
-})
+        uri: String,
+        period: {
+            startDate: String,
+            endDate: String,
+            durationInDays: String,
+            maxExtentDate: String
+        },
+        budgetLines: [
+            {
+                id: {
+                    type: String,
+                    default: new Types.ObjectId().toString()
+                },
+                origin: String,
+                components: [
+                    {
+                        name: String,
+                        level: String,
+                        code: String,
+                        description: String
+                    }
+                ]
+            }
+        ],
+        sourceParty: {                    
+            name: String,
+            id: String
+        }
+    },
+    { _id: false }
+);              
+
+
+
+export const PlanningSchema = new mongoo.Schema(
+    {
+        rationale: String,
+        hasQuotes: Boolean,
+        requestingUnits: [RequestingUnitsSchema],
+        responsibleUnits: [ResponsibleUnitsSchema],
+        contractingUnits: [ContractingUnitsSchema],
+        requestForQuotes: [RequestForQuotesSchema],
+        budget: BudgetSchema,
+        documents: [DocumentsSchema],
+        milestones: [MilestoneSchema]
+    },
+    { _id: false }
+);  

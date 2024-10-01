@@ -5,6 +5,8 @@ import { ClientError } from '../exceptions/clientError';
 import Health from '../models/health.model';
 import Record from '../models/records.model';
 
+
+
 class ControllerPlanning {
     static checkRequest = async (req: Request, res: Response, next: NextFunction) => {
         const { body } = req;
