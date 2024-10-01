@@ -3,6 +3,7 @@ import { IContract } from './contracts/contract.interface';
 import { IMetadata } from './metadata/metadata.interface';
 import { IAward } from './awards/award.interface';
 import { ITender } from './tenders/tender.interface';
+import { IPlanning } from './planning/planning.interface';
 import { IParties } from './parties/parties.interface';
 
 export interface IRecord extends Document {
@@ -12,6 +13,7 @@ export interface IRecord extends Document {
   contracts: IContract[];
   awards:IAward;
   tender: ITender;
+  planning: IPlanning;
   parties: [IParties];
 }
 

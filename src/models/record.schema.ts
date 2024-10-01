@@ -6,6 +6,7 @@ import { ContractSchema } from './contracts/contract.schema';
 import { MetadataSchema } from './metadata/metadata.schema';
 import { AwardSchema } from './awards/award.schema';
 import { TenderSchema } from './tenders/tender.schema';
+import { PlanningSchema } from './planning/planning.schema';
 import config from '../config';
 import { PartiesSchema } from './parties/parties.schema';
 import { implementationSchema } from './implements/implementation.schema';
