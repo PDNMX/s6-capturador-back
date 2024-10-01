@@ -7,6 +7,7 @@ import { MetadataSchema } from './metadata/metadata.schema';
 import { AwardSchema } from './awards/award.schema';
 import { TenderSchema } from './tenders/tender.schema';
 import config from '../config';
+import { PartiesSchema } from './parties/parties.schema';
 
 let mongoo = mongooseService.getMongoose();
 let ocid = config.ocid;
@@ -20,7 +21,8 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   metadata: MetadataSchema,
   contract: ContractSchema,
   awards: [AwardSchema],
-  tender: TenderSchema
+  tender: TenderSchema,
+  parties: [PartiesSchema]
 });
 
 RecordSchema.set('toJSON', {

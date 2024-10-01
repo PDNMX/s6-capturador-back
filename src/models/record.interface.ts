@@ -3,6 +3,7 @@ import { IContract } from './contracts/contract.interface';
 import { IMetadata } from './metadata/metadata.interface';
 import { IAward } from './awards/award.interface';
 import { ITender } from './tenders/tender.interface';
+import { IParties } from './parties/parties.interface';
 
 export interface IRecord extends Document {
   ocid: string;
@@ -11,6 +12,7 @@ export interface IRecord extends Document {
   contract: IContract;
   awards: IAward;
   tender: ITender;
+  parties: [IParties];
 }
 
 export interface IDataUpdate {
