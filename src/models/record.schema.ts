@@ -20,7 +20,7 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
     default: () => `${ocid}-${new Types.ObjectId().toString()}`,
   },
   metadata: MetadataSchema,
-  award: [AwardSchema],
+  awards: [AwardSchema],
   tender: TenderSchema,
 });
 
