@@ -8,7 +8,7 @@ const router = Router();
 const validations = [checkJwt, asyncHandler(ControllerAwards.checkRequest)];
 
 router.get('/:id', validations, asyncHandler(ControllerAwards.getById));
-router.post('/:id', validations, asyncHandler(ControllerAwards.addAward));
+router.post('/:id', validations, asyncHandler(ControllerAwards.addAwards));
 //router.post("/insert", /* validations, */ asyncHandler(ControllerAwards.insertAward));
 //router.post('/getAll', validations, asyncHandler(ControllerAwards.getAll));
 //router.post("/update", /* validations, */ asyncHandler(ControllerAwards.executeQuery));
