@@ -8,7 +8,7 @@ const router = Router();
 
 const validations = [checkJwt, asyncHandler(ControllerPlanning.checkRequest)];
 
-router.get('/:id', validations, asyncHandler(ControllerPlanning.getById));
+router.get('/:id', validations, asyncHandler(ControllerPlanning.getByID));
 router.post('/:id', validations, asyncHandler(ControllerPlanning.addPlanning));
 
 // router.post('/', validations, asyncHandler(ControllerRecords.addRecord));

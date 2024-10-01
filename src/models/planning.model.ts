@@ -11,4 +11,4 @@ export class Planning {
     }
 }
 
-export default Planning;
+
