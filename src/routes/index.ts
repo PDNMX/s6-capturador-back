@@ -11,4 +11,5 @@ routes.use('/records', records);
 routes.use('/awards', awards);
 routes.use('/contracts', contracts);
 routes.use('/tender', tenders);
+routes.use('/implements', contracts);
 export default routes;

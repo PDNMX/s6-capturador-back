@@ -21,10 +21,9 @@ app.use(function (req, res, next) {
     }
 });
 
-
 app.use('/' + config.prefix, routes);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
-    console.log(`Servidor ejecutandose en el puerto: ${config.port}`);
+    console.log(`Servidor ejecutándose en el puerto: ${config.port}`);
 });
