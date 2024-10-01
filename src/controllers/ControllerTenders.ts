@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
-// import Declaracion from '../models/declaracion.model';
-import Health from '../models/health.model';
 import Record from '../models/records.model';
 
 class ControllerTender {
@@ -11,7 +9,7 @@ class ControllerTender {
     try {
       await querySchema.validate(body);
     } catch (err: object | any) {
-      throw new ClientError('health_8001', 'Error en la consulta enviada', `${err.path}: ${err.errors}`);
+      throw new ClientError('tender_8001', 'Error en la consulta enviada', `${err.path}: ${err.errors}`);
     }
 
     next();
@@ -32,7 +30,7 @@ class ControllerTender {
     // const doc = await Record.getById({ id, data: null });
     // const oldTender = JSON.parse(JSON.stringify(doc.record.tender));
     const tenderData = JSON.parse(JSON.stringify(req.body));
-    console.log('tenderData: ', tenderData);
+    // console.log('tenderData: ', tenderData);
 
     if (tenderData.tenderers.length !== 0) {
       tenderData.numberOfTenderers = tenderData.tenderers.length;
@@ -46,7 +44,6 @@ class ControllerTender {
     res.json(data);
   };
 
-  // extra
 }
 
 export default ControllerTender;
