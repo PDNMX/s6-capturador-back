@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
-import { ContractModel } from '../models/contracts/contracts.model';
+//import { ContractModel } from '../models/contracts/contracts.model';
 import Record from '../models/records.model';
-import { contractData, itemContractData } from '../schemas/contract.yup.query';
+//import { contractData, itemContractData } from '../schemas/contract.yup.query';
 
 class CustomError extends Error {
   constructor(
@@ -30,13 +30,13 @@ class ControllerContracts {
   };
 
   /* En esta sección se valida contra el esquema de yup */
-  static prueba = async (req: Request, res: Response, next: NextFunction) => { 
+ /*  static prueba = async (req: Request, res: Response, next: NextFunction) => {  */
     /*     const contractValueData = {
           value: {
             amount: 1000+1,
             currency: ['USD'],
           },
-        }; */
+        }; *//* 
         const contractValueData = req.body;
         try {
           await itemContractData.validate(contractValueData);
@@ -46,11 +46,11 @@ class ControllerContracts {
         } catch (err: any) {
           throw new ClientError('Contracts_8002', 'Error en la consulta enviada', `${err.path}: ${err.errors}`);
           res.send({"status": "chale"});
-        }
+        } */
     
         /* const data = await ContractModel.insertContract(req);
         res.json(data); */
-  };
+  /* }; */
 
   static insertData = async (req: Request, res: Response, next: NextFunction) => {
     //delete req.body.id;
