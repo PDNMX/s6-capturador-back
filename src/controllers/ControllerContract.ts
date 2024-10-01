@@ -5,18 +5,6 @@ import { ContractModel } from '../models/contracts/contracts.model';
 import Record from '../models/records.model';
 import { contractData, itemContractData } from '../schemas/contract.yup.query';
 
-class CustomError extends Error {
-  constructor(
-    public code: string,
-    public message: string,
-    public statusCode: number,
-    public additionalInfo?: string
-  ) {
-    super(message);
-    this.name = 'CustomError';
-  }
-}
-
 class ControllerContracts {
   static checkRequest = async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
@@ -56,7 +44,7 @@ class ControllerContracts {
     //delete req.body.id;
     //const { body } = req;
     const { body } = req;
-    console.log("body desde insertData en controllerContract", body );
+    console.log("body desde insertData", body );
     const data = await Record.insert(body);
 
     res.json(data);
@@ -83,72 +71,21 @@ class ControllerContracts {
     res.json(data);
   };
 
+  static getById = async (req: Request, res: Response, next: NextFunction) => {
+    const data = await Record.getById(req.body);
+
+    res.json(data);
+  };
+
   static query = async (req: Request, res: Response, next: NextFunction) => {
     const data = await Record.query(req.body);
 
     res.json(data);
   };
 
-  
-  static getById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = await Record.getById(req.body);
-      res.json(data);
-      
-    }
-    catch (error: unknown) {
-      if (error instanceof CustomError) {
-        res.status(error.statusCode || 500).json({
-          exists: false,
-          error: {
-            code: error.code,
-            message: error.message
-          }
-        });
-      } else {
-        res.status(500).json({
-          exists: false,
-          error: {
-            code: 'UNKNOWN_ERROR',
-            message: 'Se produjo un error desconocido'
-          }
-        });
-      }
-    }
-  };
-
-  /* 
-  static getById = async (req: Request, res: Response, 
-    next: NextFunction) => {
-    try {
-      const data = await Record.getById(req.body);
-      res.json(data);
-    } catch (error: unknown) {
-      if (error instanceof CustomError) {
-        res.status(error.statusCode || 500).json({
-          exists: false,
-          error: {
-            code: error.code,
-            message: error.message
-          }
-        });
-      } else {
-        res.status(500).json({
-          exists: false,
-          error: {
-            code: 'UNKNOWN_ERROR',
-            message: 'Se produjo un error desconocido'
-          }
-        });
-      }
-    }
-  };
- */
-
   static updateData = async (req: Request, res: Response, next: NextFunction) => {
-    console.log("body desde updateData en controllerContract", req.body );
     const { body } = req;
-       const data = await Record.update(body);
+    const data = await Record.update(body);
 
     res.json(data);
   };

@@ -8,8 +8,8 @@ export interface IRecord extends Document {
   ocid: string;
   id: string;
   metadata: IMetadata;
-  contracts: IContract[];
-  award:IAward;
+  contract: IContract;
+  awards: IAward;
   tender: ITender;
 }
 
