@@ -7,12 +7,13 @@ const router = Router();
 
 const validations = [checkJwt, asyncHandler(ControllerAwards.checkRequest)];
 
-router.post("/", validations, asyncHandler(ControllerAwards.executeQuery));
-router.post("/insert", /* validations, */ asyncHandler(ControllerAwards.insertAward));
-router.post('/getAll', validations, asyncHandler(ControllerAwards.getAll));
+router.get('/:id', validations, asyncHandler(ControllerAwards.getById));
+router.post('/:id', validations, asyncHandler(ControllerAwards.addAward));
+//router.post("/insert", /* validations, */ asyncHandler(ControllerAwards.insertAward));
+//router.post('/getAll', validations, asyncHandler(ControllerAwards.getAll));
 //router.post("/update", /* validations, */ asyncHandler(ControllerAwards.executeQuery));
-router.post("/query", /* validations, */ asyncHandler(ControllerAwards.query));
-router.post("/getById", /* validations, */ asyncHandler(ControllerAwards.getById));
-router.put('/update', validations, asyncHandler(ControllerAwards.updateData));
+//router.post("/query", /* validations, */ asyncHandler(ControllerAwards.query));
+//router.post("/getById", /* validations, */ asyncHandler(ControllerAwards.getById));
+//router.put('/update', validations, asyncHandler(ControllerAwards.updateData));
 
 export default router;

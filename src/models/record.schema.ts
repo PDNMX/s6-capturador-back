@@ -1,22 +1,30 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { IRecord, IRecordModelPagination } from './record.interface';
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
 import mongooseService from '../common/services/mongoose.service';
 import { ContractSchema } from './contracts/contract.schema';
 import { MetadataSchema } from './metadata/metadata.schema';
 import { AwardSchema } from './awards/award.schema';
 import { TenderSchema } from './tenders/tender.schema';
 import { PlanningSchema } from './planning/planning.schema';
+import config from '../config';
+import { PartiesSchema } from './parties/parties.schema';
+import { implementationSchema } from './implements/implementation.schema';
 
 let mongoo = mongooseService.getMongoose();
+let ocid = config.ocid;
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
-  metadata: MetadataSchema,
-  contract: ContractSchema,
-  award: AwardSchema,
+  contracts: [ContractSchema],
+  ocid: {
+    type: String,
+    default: () => `${ocid}-${new Types.ObjectId().toString()}`
+  },
+  metadata: MetadataSchema,  
+  awards: [AwardSchema],
   tender: TenderSchema,
-  planning: PlanningSchema
+  parties: [PartiesSchema]
 });
 
 RecordSchema.set('toJSON', {

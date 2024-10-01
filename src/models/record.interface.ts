@@ -4,14 +4,17 @@ import { IMetadata } from './metadata/metadata.interface';
 import { IAward } from './awards/award.interface';
 import { ITender } from './tenders/tender.interface';
 import { IPlanning } from './planning/planning.interface';
+import { IParties } from './parties/parties.interface';
 
 export interface IRecord extends Document {
-  id: String;
+  ocid: string;
+  id: string;
   metadata: IMetadata;
-  contract: IContract;
-  award: IAward;
+  contracts: IContract[];
+  awards:IAward;
   tender: ITender;
   planning: IPlanning;
+  parties: [IParties];
 }
 
 export interface IDataUpdate {
