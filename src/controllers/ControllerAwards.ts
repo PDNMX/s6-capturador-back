@@ -26,20 +26,6 @@ class ControllerAwards {
     next();
   };
 
-  static executeQuery = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    /* const data = await ContractModel.getStatus(req);
-    res.json(data); */
-    let body = req.body;
-    // Corrigiendo la sintaxis de res.send()
-    console.log("body", body);
-    res.send({
-      body,
-    });
-  };
 
   static query = async (req: Request, res: Response, next: NextFunction) => {
     const data = await Record.query(req.body);
@@ -65,55 +51,15 @@ class ControllerAwards {
     res.json({ awards });
   };
 
-  static addAward = async (req: Request, res: Response, next: NextFunction) => {
+  static addAwards = async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
 
-    const awardData = JSON.parse(JSON.stringify(req.body));
-    console.log("awardData: ", awardData);
+    const awardsData = JSON.parse(JSON.stringify(req.body));
+    console.log("awardsData: ", awardsData);
 
-    if (awardData.suppliers.length !== 0) {
-      awardData.numberOfSuppliers = awardData.suppliers.length;
-    }
-
-    const data = await Record.update({ id, data: { awards: awardData } });
+  
+    const data = await Record.update({ id, data: { ...awardsData } });
     res.json(data);
   };
-
-  /*   static insertAward = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const { body } = req;
-    const data = await Record.insert(body); // Utiliza el modelo Record para insertar los datos de la seccion awards a la base de datos
-    res.json(data);
-  }; */
-
-  /*   static updateData = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const { id, data } = req.body;
-
-      if (!id) {
-        return res
-          .status(400)
-          .json({
-            message: "Se requiere un ID válido en el cuerpo de la solicitud",
-          });
-      }
-
-      if (!data || !data.award || Object.keys(data.award).length === 0) {
-        return res
-          .status(400)
-          .json({
-            message:
-              "El cuerpo de la solicitud está vacío o no contiene datos de award",
-          });
-      }
- */
-  // Función auxiliar para convertir fechas
 }
 export default ControllerAwards;
