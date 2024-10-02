@@ -63,13 +63,13 @@ const ClarificationMeetingsSchema: Schema = new mongoo.Schema(
     date: String,
     attendees: [
       {
-        id: Number,
+        id: String,
         name: String
       }
     ],
     officials: [
       {
-        id: Number,
+        id: String,
         name: String
       }
     ]
@@ -172,7 +172,7 @@ export const TenderSchema: Schema = new mongoo.Schema(
     numberOfTenderers: Number,
     items: [ItemsSchema],
     clarificationMeetings: [ClarificationMeetingsSchema],
-    tenderers: [{ id: Number, name: String }],
+    tenderers: [{ id: String, name: String }],
     documents: [DocumentsSchema],
     milestones: [MilestoneSchema],
     amendments: [AmendmentsSchema]
