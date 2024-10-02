@@ -21,10 +21,11 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
     type: String,
     default: () => `${ocid}-${new Types.ObjectId().toString()}`
   },
-  metadata: MetadataSchema,  
+  metadata: MetadataSchema,
   awards: [AwardSchema],
   tender: TenderSchema,
-  parties: [PartiesSchema]
+  parties: [PartiesSchema],
+  planning: PlanningSchema
 });
 
 RecordSchema.set('toJSON', {
