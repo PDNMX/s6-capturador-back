@@ -36,13 +36,13 @@ interface IClarificationMeetings {
   date: string;
   attendees: [
     {
-      id: number;
+      id: string;
       name: string;
     }
   ];
   officials: [
     {
-      id: number;
+      id: string;
       name: string;
     }
   ];
@@ -132,7 +132,7 @@ export interface ITender {
   numberOfTenderers: number;
   items: Array<IItems>;
   clarificationMeetings: Array<IClarificationMeetings>;
-  tenderers: [{ id: number; name: string }];
+  tenderers: [{ id: string; name: string }];
   documents: [IDocuments];
   milestones: [IMilestone];
   amendments: [IAmendments];
