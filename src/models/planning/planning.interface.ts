@@ -59,16 +59,20 @@ interface IBudgetBreakdown {
     durationInDays: string;
     maxExtentDate: string;
   };
-  budgetLines: {
-    id: string;
-    origin: string;
-    components: {
-      name: string;
-      level: string;
-      code: string;
-      description: string;
-    }[];
-  }[];
+  budgetLines: [
+    {
+      id: string;
+      origin: string;
+      components: [
+        {
+          name: string;
+          level: string;
+          code: string;
+          description: string;
+        }
+      ];
+    }
+  ];
   sourceParty: {
     name: string;
     id: string;
@@ -108,12 +112,14 @@ interface IItems {
     description: string;
     uri: string;
   };
-  additionalClassifications: {
-    id: string;
-    scheme: string;
-    description: string;
-    uri: string;
-  }[];
+  additionalClassifications: [
+    {
+      id: string;
+      scheme: string;
+      description: string;
+      uri: string;
+    }
+  ];
   quantity: string;
   unit: {
     scheme: string;
