@@ -4,21 +4,21 @@ import mongooseService from '../../common/services/mongoose.service';
 const mongoo = mongooseService.getMongoose();
 
 const MilestoneSchema: Schema = new mongoo.Schema(
-    {
-        id: {
-            type: String,
-            default: new Types.ObjectId().toString()
-        },
-        title: String,
-        type: {type:String},
-        description: String,
-        code: String,
-        dueDate: String,
-        dateMet: String,
-        dateModified: String,
-        status: String
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
     },
-    { _id: false }
+    title: String,
+    type: { type: String },
+    description: String,
+    code: String,
+    dueDate: String,
+    dateMet: String,
+    dateModified: String,
+    status: String
+  },
+  { _id: false }
 );
 
 const DocumentsSchema: Schema = new mongoo.Schema(
