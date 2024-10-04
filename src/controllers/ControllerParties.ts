@@ -15,6 +15,20 @@ class ControllerParties {
     next();
   };
 
+  static getList = async (req: Request, res: Response) => {
+    const { id, type } = req.params;
+
+    const data = await Record.getById({ id, data: null });
+    if (type) {
+      const info = data.record.parties.filter(p => p.roles.includes(type)).map(p => ({ id: p.id, name: p.name }));
+
+      res.json({ data: info });
+    } else {
+      const info = data.record.parties.map(p => ({ id: p.id, name: p.name }));
+      res.json({ data: info });
+    }
+  };
+
   static getByID = async (req: Request, res: Response) => {
     const id = req.params.id;
     const data = await Record.getById({ id, data: null });
