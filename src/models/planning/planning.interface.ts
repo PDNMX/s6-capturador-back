@@ -144,7 +144,7 @@ interface IRequestForQuotes {
     maxExtentDate: string;
   };
   items: [IItems];
-  inviteSuppliers: [
+  invitedSuppliers: [
     {
       name: string;
       id: string;

@@ -146,7 +146,7 @@ const RequestForQuotesSchema: Schema = new mongoo.Schema(
       maxExtentDate: String
     },
     items: [ItemsSchema],
-    inviteSuppliers: [
+    invitedSuppliers: [
       {
         id: String,
         name: String
