@@ -98,38 +98,50 @@ const BudgetSchema: Schema = new mongoo.Schema(
   { _id: false }
 );
 
-const ItemsSchema: Schema = new mongoo.Schema({
-  id: {
-    type: String,
-    default: new Types.ObjectId().toString()
-  },
-  description: String,
-  classification: {
-    scheme: String,
-    id: String,
+const ItemsSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
     description: String,
-    uri: String
-  },
-  additionalClassifications: [
-    {
-      scheme: String,
+    classification: {
+      scheme: {
+        type: String,
+        default: null
+      },
       id: String,
       description: String,
       uri: String
-    }
-  ],
-  quantity: String,
-  unit: {
-    scheme: String,
-    id: String,
-    name: String,
-    value: {
-      amount: String,
-      currency: String
     },
-    uri: String
-  }
-});
+    additionalClassifications: [
+      {
+        scheme: {
+          type: String,
+          default: null
+        },
+        id: String,
+        description: String,
+        uri: String
+      }
+    ],
+    quantity: String,
+    unit: {
+      scheme: {
+        type: String,
+        default: null
+      },
+      id: String,
+      name: String,
+      value: {
+        amount: String,
+        currency: String
+      },
+      uri: String
+    }
+  },
+  { _id: false }
+);
 
 const RequestForQuotesSchema: Schema = new mongoo.Schema(
   {
@@ -158,7 +170,7 @@ const RequestForQuotesSchema: Schema = new mongoo.Schema(
           type: String,
           default: new Types.ObjectId().toString()
         },
-        descripition: String,
+        description: String,
         date: String,
         items: [ItemsSchema],
         value: {
@@ -180,49 +192,6 @@ const RequestForQuotesSchema: Schema = new mongoo.Schema(
   },
   { _id: false }
 );
-
-// const BudgetBreakdownSchema: Schema = new mongoo.Schema(
-//   {
-//     id: {
-//       type: String,
-//       default: new Types.ObjectId().toString()
-//     },
-//     description: String,
-//     amount: {
-//       amount: String,
-//       currency: String
-//     },
-//     uri: String,
-//     period: {
-//       startDate: String,
-//       endDate: String,
-//       durationInDays: String,
-//       maxExtentDate: String
-//     },
-//     budgetLines: [
-//       {
-//         id: {
-//           type: String,
-//           default: new Types.ObjectId().toString()
-//         },
-//         origin: String,
-//         components: [
-//           {
-//             name: String,
-//             level: String,
-//             code: String,
-//             description: String
-//           }
-//         ]
-//       }
-//     ],
-//     sourceParty: {
-//       name: String,
-//       id: String
-//     }
-//   },
-//   { _id: false }
-// );
 
 export const PlanningSchema = new mongoo.Schema(
   {

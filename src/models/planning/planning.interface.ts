@@ -153,7 +153,7 @@ interface IRequestForQuotes {
   quotes: [
     {
       id: string;
-      descripition: string;
+      description: string;
       date: string;
       items: [IItems];
       value: {
