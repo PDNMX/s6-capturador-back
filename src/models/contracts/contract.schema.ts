@@ -147,6 +147,54 @@ export const ContractSchema: Schema = new mongoo.Schema(
         releaseID: Schema.Types.Mixed,
       },
     ],
+    implementataion: {
+      status: Schema.Types.Mixed,
+      transactions: [
+        {
+          id: Schema.Types.Mixed,
+          source: Schema.Types.Mixed,
+          date: Schema.Types.Mixed,
+          value: {
+            amount: Schema.Types.Mixed,
+            currency: Schema.Types.Mixed,
+          },
+          payer: {
+            id: Schema.Types.Mixed,
+            name: Schema.Types.Mixed,
+          },
+          payee: {
+            id: Schema.Types.Mixed,
+            name: Schema.Types.Mixed,
+          },
+          uri: Schema.Types.Mixed,
+        },
+      ],
+      milestones: [
+        {
+          id: Schema.Types.Mixed,
+          title: Schema.Types.Mixed,
+          type: Schema.Types.Mixed,
+          description: Schema.Types.Mixed,
+          code: Schema.Types.Mixed,
+          dueDate: Schema.Types.Mixed,
+          dateMet: Schema.Types.Mixed,
+          dateModified: Schema.Types.Mixed,
+          status: Schema.Types.Mixed,
+        },
+      ],
+      documents: [
+        {
+          id: Schema.Types.Mixed,
+          documentType: Schema.Types.Mixed,
+          title: Schema.Types.Mixed,
+          description: Schema.Types.Mixed,
+          uri: Schema.Types.Mixed,
+          datePublished: Schema.Types.Mixed,
+          dateModified: Schema.Types.Mixed,
+          format: Schema.Types.Mixed,
+        },
+      ],
+    },
   },
   { strict: false }
 );
