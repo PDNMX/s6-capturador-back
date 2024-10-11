@@ -144,7 +144,7 @@ interface IRequestForQuotes {
     maxExtentDate: string;
   };
   items: [IItems];
-  inviteSuppliers: [
+  invitedSuppliers: [
     {
       name: string;
       id: string;
@@ -153,7 +153,7 @@ interface IRequestForQuotes {
   quotes: [
     {
       id: string;
-      descripition: string;
+      description: string;
       date: string;
       items: [IItems];
       value: {
