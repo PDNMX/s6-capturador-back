@@ -53,7 +53,7 @@ interface IDocuments {
   documentType: string;
   title: string;
   description: string;
-  uri: string;
+  url: string;
   datePublished: string;
   dateModified: string;
   format: string;

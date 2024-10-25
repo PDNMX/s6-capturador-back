@@ -86,7 +86,7 @@ const DocumentsSchema: Schema = new mongoo.Schema(
     documentType: String,
     title: String,
     description: String,
-    uri: String,
+    url: String,
     datePublished: String,
     dateModified: String,
     format: String,
@@ -129,18 +129,20 @@ const ItemsSchema: Schema = new mongoo.Schema(
       default: new Types.ObjectId().toString()
     },
     description: String,
-    clasification: {
+    classification: {
       scheme: String,
       id: String,
       uri: String,
       description: String
     },
-    additionalClassifications: {
-      scheme: String,
-      id: String,
-      uri: String,
-      description: String
-    },
+    additionalClassifications: [
+      {
+        scheme: String,
+        id: String,
+        uri: String,
+        description: String
+      }
+    ],
     quantity: Number,
     unit: {
       scheme: String,
@@ -160,7 +162,7 @@ export const ContractSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId()
     },
     awardID: String,
     title: String,

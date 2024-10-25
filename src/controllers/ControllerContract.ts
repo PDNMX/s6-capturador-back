@@ -149,11 +149,20 @@ class ControllerContracts {
     const id = req.params.id;
 
     const contractsData = JSON.parse(JSON.stringify(req.body));
-    console.log('partiesData: ', contractsData);
+    console.log('contractsData: ', JSON.stringify(contractsData, null, 2));
 
     const data = await Record.update({ id, data: { ...contractsData } });
 
     res.json(data);
+  };
+
+  static getByID = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const data = await Record.getById({ id, data: null });
+
+    const contracts = data.record.contracts || null;
+
+    res.json({ contracts });
   };
 }
 
