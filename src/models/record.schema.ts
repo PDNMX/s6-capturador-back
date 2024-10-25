@@ -9,14 +9,12 @@ import { TenderSchema } from './tenders/tender.schema';
 import { PlanningSchema } from './planning/planning.schema';
 import config from '../config';
 import { PartiesSchema } from './parties/parties.schema';
-import { implementationSchema } from './implements/implementation.schema';
 
 let mongoo = mongooseService.getMongoose();
 let ocid = config.ocid;
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
-  contracts: [ContractSchema],
   ocid: {
     type: String,
     default: () => `${ocid}-${new Types.ObjectId().toString()}`
@@ -25,7 +23,8 @@ const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   awards: [AwardSchema],
   tender: TenderSchema,
   parties: [PartiesSchema],
-  planning: PlanningSchema
+  planning: PlanningSchema,
+  contracts: [ContractSchema]
 });
 
 RecordSchema.set('toJSON', {
