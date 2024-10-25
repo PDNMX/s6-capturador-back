@@ -88,7 +88,7 @@ interface IDocuments {
   datePublished: string;
   dateModified: string;
   format: string;
-  languaje: string;
+  language: string;
 }
 
 interface IMilestone {

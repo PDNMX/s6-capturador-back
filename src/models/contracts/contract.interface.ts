@@ -1,80 +1,161 @@
-export interface IContract {
-  _id?: any;
-   id?: any;
-  awardID?: any;
-  title?: any;
-  description?: any;
-  status?: any;
-  surveillanceMechanisms?:[any];
-  period?: {
-    startDate: any;
-    endDate: any;
-    durationInDays: any;
-    maxExtentDate: any;
-  };
-  value?: {
-    amount: any;
-    amountNet: any;
-    currency: any;
-  };
-  dateSignedContracts?: {
-    dateSigned: any;
-  };
-  Items?: {
-    id: any;
-    description: any;
-    classification: {
-      scheme: any;
-      id: any;
-      description: any;
-    };
-    quantity: number;
-    unit: {
-      name: any;
-      value: {
-        amount: number;
-        currency: any;
-      };
-    };
-    deliveryLocation: {
-      latitude: any;
-      longitude: any;
-    };
-  };
-  documents?: {
-    id: any;
-    documentType: any;
-    title: any;
-    description: any;
-    url: any;
-    datePublished: any;
-  };
-  guarantees?: {
-    id: any;
-    description: any;
+interface IAmendments {
+  id: string;
+  date: string;
+  rationale: string;
+  description: string;
+  amendsReleaseID: string;
+  releaseID: string;
+}
+
+interface IRelatedProcesses {
+  id: string;
+  relationship: [string];
+  title: string;
+  scheme: string;
+  identifier: string;
+  uri: string;
+}
+
+interface IMilestones {
+  id: string;
+  title: string;
+  type: string;
+  description: string;
+  code: string;
+  dueDate: string;
+  dateMet: string;
+  dateModified: string;
+  status: string;
+}
+
+interface ITransactions {
+  id: string;
+  source: string;
+  date: string;
+  paymentMethod: string;
+  value: {
     amount: number;
-    currency: any;
-    dateFrom: any;
-    dateTo: any;
+    currency: string;
   };
-  relatedProcesses?: {
-    id: any;
-    relationship: any;
-    title: any;
+  payer: {
+    id: string;
+    name: string;
   };
-  amendments?: {
-    id: any;
-    date: any;
-    rationale: any;
-    amendsReleaseID: any;
-    releaseID: any;
+  payee: {
+    id: string;
+    name: string;
   };
-  milestones?: {
-    id: any;
-    title: any;
-    description: any;
-    dueDate: any;
-    dateMet: any;
+  uri: string;
+}
+
+interface IDocuments {
+  id: string;
+  documentType: string;
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+  format: string;
+  language: string;
+}
+
+interface IGuarantees {
+  id: string;
+  type: string;
+  date: string;
+  obligations: string;
+  value: {
+    amount: number;
+    currency: string;
   };
-  
+  guarantor: {
+    id: string;
+    name: string;
+  };
+  period: {
+    startDate: string;
+    endDate: string;
+    durationInDays: number;
+    maxExtentDate: string;
+  };
+}
+
+interface IItems {
+  id: string;
+  description: string;
+  classification: {
+    scheme: string;
+    id: string;
+    uri: string;
+    description: string;
+  };
+
+  additionalClassifications: [
+    {
+      scheme: string;
+      id: string;
+      uri: string;
+      description: string;
+    }
+  ];
+
+  quantity: number;
+  unit: {
+    scheme: string;
+    id: string;
+    name: string;
+    uri: string;
+    value: {
+      amount: number;
+      currency: string;
+    };
+  };
+}
+
+export interface IContract {
+  id: string;
+  awardID: string;
+  title: string;
+  description: string;
+  status: string;
+
+  period: {
+    startDate: string;
+    endDate: string;
+    durationInDays: number;
+    maxExtentDate: string;
+  };
+
+  value: {
+    amount: number;
+    amountNet: number;
+    currency: string;
+    exchangeRates: [
+      {
+        rate: number;
+        currency: string;
+        date: string;
+        source: string;
+      }
+    ];
+  };
+
+  items: [IItems];
+
+  dateSigned: string;
+  surveillanceMechanisms: [string];
+  guarantees: [IGuarantees];
+  documents: [IDocuments];
+
+  implementation: {
+    status: string;
+    transactions: [ITransactions];
+    milestones: [IMilestones];
+    documents: [IDocuments];
+  };
+
+  relatedProcesses: [IRelatedProcesses];
+  milestones: [IMilestones];
+  amendments: [IAmendments];
 }

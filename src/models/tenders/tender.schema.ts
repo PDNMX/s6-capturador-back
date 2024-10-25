@@ -49,7 +49,7 @@ const DocumentsSchema: Schema = new mongoo.Schema(
     datePublished: String,
     dateModified: String,
     format: String,
-    languaje: String
+    language: String
   },
   { _id: false }
 );

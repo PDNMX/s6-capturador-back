@@ -1,200 +1,206 @@
-import mongoose, { Schema } from "mongoose";
-//import mongoosePaginate from "mongoose-paginate-v2";
-import mongooseService from "../../common/services/mongoose.service";
-//import { IContract } from "./contract.interface";
+import { Schema, Types } from 'mongoose';
+import mongooseService from '../../common/services/mongoose.service';
 
 const mongoo = mongooseService.getMongoose();
+
+const AmendmentsSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    date: String,
+    rationale: String,
+    description: String,
+    amendsReleaseID: String,
+    releaseID: String
+  },
+  { _id: false }
+);
+
+const RelatedProcessesSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    relationship: [String],
+    title: String,
+    scheme: String,
+    identifier: String,
+    uri: String
+  },
+  { _id: false }
+);
+
+const MilestonesSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    title: String,
+    type: String,
+    description: String,
+    code: String,
+    dueDate: String,
+    dateMet: String,
+    dateModified: String,
+    status: String
+  },
+  { _id: false }
+);
+
+const TransactionsSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    source: String,
+    date: String,
+    paymentMethod: String,
+    value: {
+      amount: Number,
+      currency: String
+    },
+    payer: {
+      id: String,
+      name: String
+    },
+    payee: {
+      id: String,
+      name: String
+    },
+    uri: String
+  },
+  { _id: false }
+);
+
+const DocumentsSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    documentType: String,
+    title: String,
+    description: String,
+    url: String,
+    datePublished: String,
+    dateModified: String,
+    format: String,
+    language: String
+  },
+  { _id: false }
+);
+
+const GuaranteesSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    type: String,
+    date: String,
+    obligations: String,
+    value: {
+      amount: Number,
+      currency: String
+    },
+    guarantor: {
+      id: String,
+      name: String
+    },
+    period: {
+      startDate: String,
+      endDate: String,
+      durationInDays: Number,
+      maxExtentDate: String
+    }
+  },
+  { _id: false }
+);
+
+const ItemsSchema: Schema = new mongoo.Schema(
+  {
+    id: {
+      type: String,
+      default: new Types.ObjectId().toString()
+    },
+    description: String,
+    classification: {
+      scheme: String,
+      id: String,
+      uri: String,
+      description: String
+    },
+    additionalClassifications: [
+      {
+        scheme: String,
+        id: String,
+        uri: String,
+        description: String
+      }
+    ],
+    quantity: Number,
+    unit: {
+      scheme: String,
+      id: String,
+      name: String,
+      uri: String,
+      value: {
+        amount: Number,
+        currency: String
+      }
+    }
+  },
+  { _id: false }
+);
+
 export const ContractSchema: Schema = new mongoo.Schema(
   {
-    _id: String,
-    id: Schema.Types.Mixed,
-    status: Schema.Types.Mixed,
-    awardID: Schema.Types.Mixed,
-    title: Schema.Types.Mixed,
-    description: Schema.Types.Mixed,
-    surveillanceMechanisms: Schema.Types.Mixed,
+    id: {
+      type: String,
+      default: new Types.ObjectId()
+    },
+    awardID: String,
+    title: String,
+    description: String,
+    status: String,
     period: {
-      startDate: Schema.Types.Mixed,
-      endDate: Schema.Types.Mixed,
-      durationInDays: Schema.Types.Mixed,
-      maxExtentDate: Schema.Types.Mixed,
+      startDate: String,
+      endDate: String,
+      durationInDays: Number,
+      maxExtentDate: String
     },
     value: {
-      amount: Schema.Types.Mixed,
-      amountNet: Schema.Types.Mixed,
-      currency: Schema.Types.Mixed,
-    },
-    dateSignedContracts: {
-      dateSigned: Schema.Types.Mixed,
-    },
-    items: [
-      {
-        id: Schema.Types.Mixed,
-        description: Schema.Types.Mixed,
-        clasification: {
-          scheme: Schema.Types.Mixed,
-          id: Schema.Types.Mixed,
-          uri: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-        },
-        additionalClassifications: {
-          scheme: Schema.Types.Mixed,
-          id: Schema.Types.Mixed,
-          uri: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-        },
-        quantity: Schema.Types.Mixed,
-        unit: {
-          scheme: Schema.Types.Mixed,
-          id: Schema.Types.Mixed,
-          name: Schema.Types.Mixed,
-          uri: Schema.Types.Mixed,
-          value: {
-            amount: Schema.Types.Mixed,
-            currency: Schema.Types.Mixed,
-          },
-        },
-        deliveryLocation: {
-          uri: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-          geometry: {
-            type: Schema.Types.Mixed,
-            coordinates: {
-              latitude: Schema.Types.Mixed,
-              longitude: Schema.Types.Mixed,
-            },
-            gazetteer: {
-              scheme: Schema.Types.Mixed,
-              identifiers: Schema.Types.Mixed,
-            },
-          },
-        },
-        deliveryAddress: {
-          uri: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-          streetAddress: Schema.Types.Mixed,
-          locality: Schema.Types.Mixed,
-          region: Schema.Types.Mixed,
-          postalCode: Schema.Types.Mixed,
-          countryName: Schema.Types.Mixed,
-        },
-      },
-    ],
-    guarantees: [
-      {
-        id: Schema.Types.Mixed,
-        type: Schema.Types.Mixed,
-        date: Schema.Types.Mixed,
-        obligations: Schema.Types.Mixed,
-        value: {
-          amount: Schema.Types.Mixed,
-          currency: Schema.Types.Mixed,
-        },
-        guarantor: {
-          id: Schema.Types.Mixed,
-          name: Schema.Types.Mixed,
-        },
-        period: {
-          startDate: Schema.Types.Mixed,
-          endDate: Schema.Types.Mixed,
-          durationInDays: Schema.Types.Mixed,
-          maxExtentDate: Schema.Types.Mixed,
-        },
-      },
-    ],
-    documents: [
-      {
-        id: Schema.Types.Mixed,
-        documentType: Schema.Types.Mixed,
-        title: Schema.Types.Mixed,
-        description: Schema.Types.Mixed,
-        uri: Schema.Types.Mixed,
-        datePublished: Schema.Types.Mixed,
-        dateModified: Schema.Types.Mixed,
-        format: Schema.Types.Mixed,
-      },
-    ],
-    relatedProcesses: [
-      {
-        id: Schema.Types.Mixed,
-        relationship: Schema.Types.Mixed,
-        title: Schema.Types.Mixed,
-        scheme: Schema.Types.Mixed,
-        identifier: Schema.Types.Mixed,
-        uri: Schema.Types.Mixed,
-      },
-    ],
-    milestones: [
-      {
-        id: Schema.Types.Mixed,
-        title: Schema.Types.Mixed,
-        type: Schema.Types.Mixed,
-        description: Schema.Types.Mixed,
-        code: Schema.Types.Mixed,
-        dueDate: Schema.Types.Mixed,
-        dateMet: Schema.Types.Mixed,
-        dateModified: Schema.Types.Mixed,
-        status: Schema.Types.Mixed,
-      },
-    ],
-    amendments: [
-      {
-        id: Schema.Types.Mixed,
-        date: Schema.Types.Mixed,
-        rationale: Schema.Types.Mixed,
-        description: Schema.Types.Mixed,
-        amendsReleaseID: Schema.Types.Mixed,
-        releaseID: Schema.Types.Mixed,
-      },
-    ],
-    implementataion: {
-      status: Schema.Types.Mixed,
-      transactions: [
+      amount: Number,
+      amountNet: Number,
+      currency: String,
+      exchangeRates: [
         {
-          id: Schema.Types.Mixed,
-          source: Schema.Types.Mixed,
-          date: Schema.Types.Mixed,
-          value: {
-            amount: Schema.Types.Mixed,
-            currency: Schema.Types.Mixed,
-          },
-          payer: {
-            id: Schema.Types.Mixed,
-            name: Schema.Types.Mixed,
-          },
-          payee: {
-            id: Schema.Types.Mixed,
-            name: Schema.Types.Mixed,
-          },
-          uri: Schema.Types.Mixed,
-        },
-      ],
-      milestones: [
-        {
-          id: Schema.Types.Mixed,
-          title: Schema.Types.Mixed,
-          type: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-          code: Schema.Types.Mixed,
-          dueDate: Schema.Types.Mixed,
-          dateMet: Schema.Types.Mixed,
-          dateModified: Schema.Types.Mixed,
-          status: Schema.Types.Mixed,
-        },
-      ],
-      documents: [
-        {
-          id: Schema.Types.Mixed,
-          documentType: Schema.Types.Mixed,
-          title: Schema.Types.Mixed,
-          description: Schema.Types.Mixed,
-          uri: Schema.Types.Mixed,
-          datePublished: Schema.Types.Mixed,
-          dateModified: Schema.Types.Mixed,
-          format: Schema.Types.Mixed,
-        },
-      ],
+          rate: Number,
+          currency: String,
+          date: String,
+          source: String
+        }
+      ]
     },
+    items: [ItemsSchema],
+    dateSigned: String,
+    surveillanceMechanisms: [String],
+    guarantees: [GuaranteesSchema],
+    documents: [DocumentsSchema],
+    implementation: {
+      status: String,
+      transactions: [TransactionsSchema],
+      milestones: [MilestonesSchema],
+      documents: [DocumentsSchema]
+    },
+    relatedProcesses: [RelatedProcessesSchema],
+    milestones: [MilestonesSchema],
+    amendments: [AmendmentsSchema]
   },
-  { strict: false }
+  { _id: false }
 );
