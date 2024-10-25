@@ -61,7 +61,7 @@ const TransactionsSchema: Schema = new mongoo.Schema(
     date: String,
     paymentMethod: String,
     value: {
-      amount: String,
+      amount: Number,
       currency: String
     },
     payer: {
@@ -105,7 +105,7 @@ const GuaranteesSchema: Schema = new mongoo.Schema(
     date: String,
     obligations: String,
     value: {
-      amount: String,
+      amount: Number,
       currency: String
     },
     guarantor: {
@@ -115,7 +115,7 @@ const GuaranteesSchema: Schema = new mongoo.Schema(
     period: {
       startDate: String,
       endDate: String,
-      durationInDays: String,
+      durationInDays: Number,
       maxExtentDate: String
     }
   },
@@ -148,7 +148,7 @@ const ItemsSchema: Schema = new mongoo.Schema(
       name: String,
       uri: String,
       value: {
-        amount: String,
+        amount: Number,
         currency: String
       }
     }
@@ -169,12 +169,12 @@ export const ContractSchema: Schema = new mongoo.Schema(
     period: {
       startDate: String,
       endDate: String,
-      durationInDays: String,
+      durationInDays: Number,
       maxExtentDate: String
     },
     value: {
-      amount: String,
-      amountNet: String,
+      amount: Number,
+      amountNet: Number,
       currency: String,
       exchangeRates: [
         {

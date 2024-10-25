@@ -34,7 +34,7 @@ interface ITransactions {
   date: string;
   paymentMethod: string;
   value: {
-    amount: string;
+    amount: number;
     currency: string;
   };
   payer: {
@@ -66,7 +66,7 @@ interface IGuarantees {
   date: string;
   obligations: string;
   value: {
-    amount: string;
+    amount: number;
     currency: string;
   };
   guarantor: {
@@ -76,7 +76,7 @@ interface IGuarantees {
   period: {
     startDate: string;
     endDate: string;
-    durationInDays: string;
+    durationInDays: number;
     maxExtentDate: string;
   };
 }
@@ -123,13 +123,13 @@ export interface IContract {
   period: {
     startDate: string;
     endDate: string;
-    durationInDays: string;
+    durationInDays: number;
     maxExtentDate: string;
   };
 
   value: {
-    amount: string;
-    amountNet: string;
+    amount: number;
+    amountNet: number;
     currency: string;
     exchangeRates: [
       {
