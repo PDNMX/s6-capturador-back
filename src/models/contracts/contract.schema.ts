@@ -161,6 +161,10 @@ const ItemsSchema: Schema = new mongoo.Schema(
 
 export const ContractSchema: Schema = new mongoo.Schema(
   {
+    _id: {
+      type: String,
+      default: new Types.ObjectId().toString(),
+    },
     id: {
       type: String,
       default: new Types.ObjectId(),
