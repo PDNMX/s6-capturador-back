@@ -114,6 +114,7 @@ interface IItems {
 }
 
 export interface IContract {
+  _id: string;
   id: string;
   awardID: string;
   title: string;

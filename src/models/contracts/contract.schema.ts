@@ -1,5 +1,6 @@
-import { Schema, Types } from 'mongoose';
-import mongooseService from '../../common/services/mongoose.service';
+import { Schema, Types } from "mongoose";
+import mongooseService from "../../common/services/mongoose.service";
+import _ from "mongoose-paginate-v2";
 
 const mongoo = mongooseService.getMongoose();
 
@@ -7,13 +8,13 @@ const AmendmentsSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     date: String,
     rationale: String,
     description: String,
     amendsReleaseID: String,
-    releaseID: String
+    releaseID: String,
   },
   { _id: false }
 );
@@ -22,13 +23,13 @@ const RelatedProcessesSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     relationship: [String],
     title: String,
     scheme: String,
     identifier: String,
-    uri: String
+    uri: String,
   },
   { _id: false }
 );
@@ -37,7 +38,7 @@ const MilestonesSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     title: String,
     type: String,
@@ -46,7 +47,7 @@ const MilestonesSchema: Schema = new mongoo.Schema(
     dueDate: String,
     dateMet: String,
     dateModified: String,
-    status: String
+    status: String,
   },
   { _id: false }
 );
@@ -55,24 +56,24 @@ const TransactionsSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     source: String,
     date: String,
     paymentMethod: String,
     value: {
       amount: Number,
-      currency: String
+      currency: String,
     },
     payer: {
       id: String,
-      name: String
+      name: String,
     },
     payee: {
       id: String,
-      name: String
+      name: String,
     },
-    uri: String
+    uri: String,
   },
   { _id: false }
 );
@@ -81,7 +82,7 @@ const DocumentsSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     documentType: String,
     title: String,
@@ -90,7 +91,7 @@ const DocumentsSchema: Schema = new mongoo.Schema(
     datePublished: String,
     dateModified: String,
     format: String,
-    language: String
+    language: String,
   },
   { _id: false }
 );
@@ -99,25 +100,25 @@ const GuaranteesSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     type: String,
     date: String,
     obligations: String,
     value: {
       amount: Number,
-      currency: String
+      currency: String,
     },
     guarantor: {
       id: String,
-      name: String
+      name: String,
     },
     period: {
       startDate: String,
       endDate: String,
       durationInDays: Number,
-      maxExtentDate: String
-    }
+      maxExtentDate: String,
+    },
   },
   { _id: false }
 );
@@ -126,22 +127,22 @@ const ItemsSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString()
+      default: new Types.ObjectId().toString(),
     },
     description: String,
     classification: {
       scheme: String,
       id: String,
       uri: String,
-      description: String
+      description: String,
     },
     additionalClassifications: [
       {
         scheme: String,
         id: String,
         uri: String,
-        description: String
-      }
+        description: String,
+      },
     ],
     quantity: Number,
     unit: {
@@ -151,18 +152,22 @@ const ItemsSchema: Schema = new mongoo.Schema(
       uri: String,
       value: {
         amount: Number,
-        currency: String
-      }
-    }
+        currency: String,
+      },
+    },
   },
   { _id: false }
 );
 
 export const ContractSchema: Schema = new mongoo.Schema(
   {
+    _id: {
+      type: String,
+      default: new Types.ObjectId().toString(),
+    },
     id: {
       type: String,
-      default: new Types.ObjectId()
+      default: new Types.ObjectId(),
     },
     awardID: String,
     title: String,
@@ -172,7 +177,7 @@ export const ContractSchema: Schema = new mongoo.Schema(
       startDate: String,
       endDate: String,
       durationInDays: Number,
-      maxExtentDate: String
+      maxExtentDate: String,
     },
     value: {
       amount: Number,
@@ -183,9 +188,9 @@ export const ContractSchema: Schema = new mongoo.Schema(
           rate: Number,
           currency: String,
           date: String,
-          source: String
-        }
-      ]
+          source: String,
+        },
+      ],
     },
     items: [ItemsSchema],
     dateSigned: String,
@@ -196,11 +201,11 @@ export const ContractSchema: Schema = new mongoo.Schema(
       status: String,
       transactions: [TransactionsSchema],
       milestones: [MilestonesSchema],
-      documents: [DocumentsSchema]
+      documents: [DocumentsSchema],
     },
     relatedProcesses: [RelatedProcessesSchema],
     milestones: [MilestonesSchema],
-    amendments: [AmendmentsSchema]
+    amendments: [AmendmentsSchema],
   },
   { _id: false }
 );
