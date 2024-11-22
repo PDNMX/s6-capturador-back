@@ -81,7 +81,7 @@ export const AwardSchema: Schema = new mongoo.Schema(
   {
     id: {
       type: String,
-      default: new Types.ObjectId().toString(),
+      //default: new Types.ObjectId().toString(),
     },
     status: String,
     title: String,
