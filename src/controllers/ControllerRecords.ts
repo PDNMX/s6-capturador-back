@@ -3,7 +3,7 @@ import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
 // import Declaracion from '../models/declaracion.model';
 import Health from '../models/health.model';
-import Record from '../models/records.model';
+import Record from '../models/record/records.model';
 
 class ControllerRecords {
   static checkRequest = async (req: Request, res: Response, next: NextFunction) => {
