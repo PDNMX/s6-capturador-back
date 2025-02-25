@@ -1,7 +1,6 @@
-import { Request } from "express";
+import { Request } from 'express';
 
 export class AwardModel {
-  
   static getStatus(req: Request): { status: string; reqBody: any } {
     return { status: 'ok', reqBody: req.body };
   }
