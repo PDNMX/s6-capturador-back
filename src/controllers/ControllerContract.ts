@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
 import { ContractModel } from '../models/contracts/contracts.model';
-import Record from '../models/records.model';
+import Record from '../models/record/records.model';
 import { contractData, itemContractData } from '../schemas/contract.yup.query';
 
 class CustomError extends Error {

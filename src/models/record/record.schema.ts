@@ -1,14 +1,14 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { IRecord, IRecordModelPagination } from './record.interface';
 import mongoose, { Schema, Types } from 'mongoose';
-import mongooseService from '../common/services/mongoose.service';
-import { ContractSchema } from './contracts/contract.schema';
-import { MetadataSchema } from './metadata/metadata.schema';
-import { AwardSchema } from './awards/award.schema';
-import { TenderSchema } from './tenders/tender.schema';
-import { PlanningSchema } from './planning/planning.schema';
-import config from '../config';
-import { PartiesSchema } from './parties/parties.schema';
+import mongooseService from '../../common/services/mongoose.service';
+import { ContractSchema } from '.././contracts/contract.schema';
+import { MetadataSchema } from '.././metadata/metadata.schema';
+import { AwardSchema } from '.././awards/award.schema';
+import { TenderSchema } from '.././tenders/tender.schema';
+import { PlanningSchema } from '.././planning/planning.schema';
+import config from '../../config';
+import { PartiesSchema } from '.././parties/parties.schema';
 
 let mongoo = mongooseService.getMongoose();
 let ocid = config.ocid;

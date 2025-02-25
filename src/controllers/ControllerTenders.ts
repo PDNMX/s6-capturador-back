@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
-import Record from '../models/records.model';
+import Record from '../models/record/records.model';
 
 class ControllerTender {
   static checkRequest = async (req: Request, res: Response, next: NextFunction) => {
@@ -43,7 +43,6 @@ class ControllerTender {
 
     res.json(data);
   };
-
 }
 
 export default ControllerTender;

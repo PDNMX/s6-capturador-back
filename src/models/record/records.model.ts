@@ -1,7 +1,7 @@
 import { RecordModel, RecordModelPaginate } from './record.schema';
-import { CustomError } from '../exceptions/customError';
-import { IQuery } from '../schemas/yup.query';
 import { IDataUpdate, IRecord } from './record.interface';
+import { CustomError } from '../../exceptions/customError';
+import { IQuery } from '../../schemas/yup.query';
 
 class Record {
   static getQuery = (q: IQuery) => {

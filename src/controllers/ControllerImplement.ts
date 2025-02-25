@@ -2,16 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
 //import { ContractModel } from '../models/contracts/contracts.model';
-import Record from '../models/records.model';
+import Record from '../models/record/records.model';
 //import { contractData, itemContractData } from '../schemas/contract.yup.query';
 
 class CustomError extends Error {
-  constructor(
-    public code: string,
-    public message: string,
-    public statusCode: number,
-    public additionalInfo?: string
-  ) {
+  constructor(public code: string, public message: string, public statusCode: number, public additionalInfo?: string) {
     super(message);
     this.name = 'CustomError';
   }
@@ -30,13 +25,13 @@ class ControllerContracts {
   };
 
   /* En esta sección se valida contra el esquema de yup */
- /*  static prueba = async (req: Request, res: Response, next: NextFunction) => {  */
-    /*     const contractValueData = {
+  /*  static prueba = async (req: Request, res: Response, next: NextFunction) => {  */
+  /*     const contractValueData = {
           value: {
             amount: 1000+1,
             currency: ['USD'],
           },
-        }; *//* 
+        }; */ /* 
         const contractValueData = req.body;
         try {
           await itemContractData.validate(contractValueData);
@@ -47,8 +42,8 @@ class ControllerContracts {
           throw new ClientError('Contracts_8002', 'Error en la consulta enviada', `${err.path}: ${err.errors}`);
           res.send({"status": "chale"});
         } */
-    
-        /* const data = await ContractModel.insertContract(req);
+
+  /* const data = await ContractModel.insertContract(req);
         res.json(data); */
   /* }; */
 
@@ -56,7 +51,7 @@ class ControllerContracts {
     //delete req.body.id;
     //const { body } = req;
     const { body } = req;
-    console.log("body desde insertData en controllerContract", body );
+    console.log('body desde insertData en controllerContract', body);
     const data = await Record.insert(body);
 
     res.json(data);
@@ -74,7 +69,7 @@ class ControllerContracts {
   };
 
   static getAll = async (req: Request, res: Response, next: NextFunction) => {
-    const {body} = req;
+    const { body } = req;
     const id = body.id;
     delete body.id;
 
@@ -89,14 +84,11 @@ class ControllerContracts {
     res.json(data);
   };
 
-  
   static getById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = await Record.getById(req.body);
       res.json(data);
-      
-    }
-    catch (error: unknown) {
+    } catch (error: unknown) {
       if (error instanceof CustomError) {
         res.status(error.statusCode || 500).json({
           exists: false,
@@ -146,13 +138,12 @@ class ControllerContracts {
  */
 
   static updateData = async (req: Request, res: Response, next: NextFunction) => {
-    console.log("body desde updateData en controllerContract", req.body );
+    console.log('body desde updateData en controllerContract', req.body);
     const { body } = req;
-       const data = await Record.update(body);
+    const data = await Record.update(body);
 
     res.json(data);
   };
-
 }
 
 export default ControllerContracts;
