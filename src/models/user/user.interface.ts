@@ -8,3 +8,5 @@ interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export default IUser;
