@@ -1,4 +1,5 @@
 interface IUser extends Document {
+  id: string;
   nombre: string;
   primerApellido: string;
   segundoApellido?: string;
