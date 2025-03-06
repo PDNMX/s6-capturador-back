@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { querySchema } from '../schemas/yup.query';
 import { ClientError } from '../exceptions/clientError';
 import Institution from '../models/institution/institution.model';
+import { CustomError } from '../exceptions/customError';
 
 class InstitutionController {
   static checkRequest = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,8 +17,12 @@ class InstitutionController {
   };
 
   static createInstitution = async (req: Request, res: Response, next: NextFunction) => {
-    const data = await Institution.addInstitution(req);
-    res.json(data);
+    try {
+      const data = await Institution.addInstitution(req);
+      res.json(data);
+    } catch (error: any) {
+      throw new CustomError('INS_001', 'Error al registrar la institución', 500, error.message);
+    }
   };
   static getAllInstitutions = async (req: Request, res: Response, next: NextFunction) => {
     const data = await Institution.getAllInstitutions(req);
