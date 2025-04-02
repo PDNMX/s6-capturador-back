@@ -20,11 +20,11 @@ class ControllerParties {
 
     const data = await Record.getById({ id, data: null });
     if (type) {
-      const info = data.record.parties.filter(p => p.roles.includes(type)).map(p => ({ id: p.id, name: p.name }));
+      const info = data.record.parties.filter(p => p.roles.includes(type)).map(p => ({ id: p.id, name: p.name, legalName: p.identifier.legalName, roles: p.roles }));
 
       res.json({ data: info });
     } else {
-      const info = data.record.parties.map(p => ({ id: p.id, name: p.name }));
+      const info = data.record.parties.map(p => ({ id: p.id, name: p.name, legalName: p.identifier.legalName, roles: p.roles }));
       res.json({ data: info });
     }
   };
