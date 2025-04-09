@@ -129,7 +129,7 @@ export interface IContract {
 
   value: {
     amount: number;
-    amountNet: number;
+    netAmount: number;
     currency: string;
     exchangeRates: [
       {
