@@ -176,7 +176,7 @@ export const ContractSchema: Schema = new mongoo.Schema(
     },
     value: {
       amount: Number,
-      amountNet: Number,
+      netAmount: Number,
       currency: String,
       exchangeRates: [
         {
