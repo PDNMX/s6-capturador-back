@@ -127,6 +127,7 @@ interface IItems {
     name: string;
     value: {
       currency: string;
+      netAmount: string;
       amount: string;
     };
     uri: string;
@@ -158,6 +159,7 @@ interface IRequestForQuotes {
       items: [IItems];
       value: {
         amount: string;
+        netAmount: string;
         currency: string;
       };
       period: {
