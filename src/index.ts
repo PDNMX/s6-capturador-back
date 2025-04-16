@@ -7,7 +7,7 @@ import routes from './routes/index';
 const app = express();
 app.use(json());
 app.use((req, res, next) => {
-  console.log('req: ', JSON.stringify(req.body), JSON.stringify(req.params));
+  console.log(req.originalUrl, JSON.stringify(req.body), JSON.stringify(req.params));
   next();
 });
 
