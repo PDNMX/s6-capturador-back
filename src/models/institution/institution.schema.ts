@@ -13,7 +13,7 @@ const AddressSchema: Schema = new Schema(
 );
 
 const InstitutionSchema: Schema = new Schema<IInstitution>({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   address: { type: AddressSchema, required: true }
 });
 

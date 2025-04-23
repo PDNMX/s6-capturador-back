@@ -72,7 +72,7 @@ interface IItems {
     name: string;
     value: {
       amount: number;
-      amountNet: number;
+      netAmount: number;
       currency: string;
     };
   };

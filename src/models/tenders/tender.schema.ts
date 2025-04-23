@@ -105,7 +105,7 @@ const ItemsSchema: Schema = new mongoo.Schema(
       name: String,
       value: {
         amount: Number,
-        amountNet: Number,
+        netAmount: Number,
         currency: String
       }
     }

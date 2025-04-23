@@ -135,6 +135,7 @@ const ItemsSchema: Schema = new mongoo.Schema(
       name: String,
       value: {
         amount: String,
+        netAmount: String,
         currency: String
       },
       uri: String
@@ -175,6 +176,7 @@ const RequestForQuotesSchema: Schema = new mongoo.Schema(
         items: [ItemsSchema],
         value: {
           amount: String,
+          netAmount: String,
           currency: String
         },
         period: {

@@ -16,7 +16,7 @@ export const contractData = object({
   }),
   value: object({
     amount: string(),
-    amountNet: string(),
+    netAmount: string(),
     currency: string(),
   }),
   dateSignedContracts: object({
