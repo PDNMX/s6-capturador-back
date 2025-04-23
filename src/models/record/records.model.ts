@@ -4,14 +4,45 @@ import { CustomError } from '../../exceptions/customError';
 import { IQuery } from '../../schemas/yup.query';
 
 class Record {
+  static queryString = (cadena: String) => {
+    cadena = cadena
+      .toLowerCase()
+      .replace('ñ', '#')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/a/g, '[a,á,à,ä]')
+      .replace(/e/g, '[e,é,ë]')
+      .replace(/i/g, '[i,í,ï]')
+      .replace(/o/g, '[o,ó,ö,ò]')
+      .replace(/u/g, '[u,ü,ú,ù]')
+      .replace(/#/g, 'ñ');
+
+    return { $regex: cadena, $options: 'i' };
+  };
+
   static getQuery = (q: IQuery) => {
-    let nQuery = q.query || {};
+    let nQuery = {};
+    let query = q.query;
     let nSort = q.sort || {};
     let page = q.page || 1;
     let nPageSize = q.pageSize || 10;
     let pageSize = nPageSize < 1 ? 10 : nPageSize > 200 ? 200 : nPageSize;
 
     let ops = { page, limit: pageSize, sort: nSort, collation: { locale: 'es' } };
+
+    if (query.ocid) {
+      nQuery = { ...nQuery, ['ocid']: this.queryString(query.ocid) };
+    }
+
+    if (query.id_project) {
+      nQuery = { ...nQuery, ['planning.budget.projectID']: this.queryString(query.id_project) };
+    }
+
+    if (query.title_project) {
+      nQuery = { ...nQuery, ['planning.budget.project']: this.queryString(query.title_project) };
+    }
+
+    console.log('nQuery: ', JSON.stringify(nQuery));
 
     return { query: nQuery, options: ops };
   };
@@ -30,7 +61,7 @@ class Record {
       throw new CustomError('record_1001', '{query} Proceso de consulta fallido', error.message);
     }
   };
-  
+
   static getById = async (req: IDataUpdate) => {
     const recordId = req.id;
     console.log('recordId: ', recordId);
