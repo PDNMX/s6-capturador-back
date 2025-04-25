@@ -33,12 +33,20 @@ class InstitutionController {
     res.json(data);
   };
   static updateInstitution = async (req: Request, res: Response, next: NextFunction) => {
-    const data = await Institution.updateInstitutionByID(req);
-    res.json(data);
+    try {
+      const updatedUser = await Institution.updateInstitutionByID(req);
+      res.status(200).json(updatedUser);
+    } catch (error: any) {
+      throw new CustomError('INS_006', 'Error al actualizar la institución', 400, error.message);
+    }
   };
   static deleteInstitution = async (req: Request, res: Response, next: NextFunction) => {
-    const data = await Institution.deleteInstitution(req);
-    res.json(data);
+    try {
+      const resp = await Institution.deleteInstitution(req);
+      res.status(200).json(resp);
+    } catch (error: any) {
+      throw new CustomError('INS_008', 'Error al eliminar la institución', 500, error.message);
+    }
   };
 }
 

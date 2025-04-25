@@ -7,8 +7,6 @@ import InstitutionController from '../controllers/InstitutionController';
 const institutionRouter: Router = Router();
 
 const validations = [checkJwt, asyncHandler(InstitutionController.checkRequest)];
-
-// createUser
 institutionRouter.post('/', validations, asyncHandler(InstitutionController.createInstitution));
 institutionRouter.get('/', validations, asyncHandler(InstitutionController.getAllInstitutions));
 institutionRouter.get('/:id', validations, asyncHandler(InstitutionController.getInstitutionByID));
