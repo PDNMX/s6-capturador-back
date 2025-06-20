@@ -87,9 +87,6 @@ class ControllerRecords {
       query: nQuery
     };
 
-    console.log('nReq: ', nReq);
-    console.log('req.body: ', req.body);
-
     const data = await Record.query(nReq);
 
     res.json(data);

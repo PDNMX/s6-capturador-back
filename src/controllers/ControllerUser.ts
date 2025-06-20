@@ -19,7 +19,6 @@ class ControllerUser {
 
   static createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const response: any = await Users.addUser(req);
-    console.log('response: ', response);
 
     if (!response.ok) {
       throw new CustomError('USR_001', 'Error al crear el usuario', 400, response.error);
@@ -33,7 +32,7 @@ class ControllerUser {
       const users = await Users.getAllUsers(req);
       res.status(200).json(users);
     } catch (error: any) {
-      console.log('error123: ', error);
+      console.error('error123: ', error);
     }
   };
 

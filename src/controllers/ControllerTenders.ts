@@ -30,7 +30,6 @@ class ControllerTender {
     // const doc = await Record.getById({ id, data: null });
     // const oldTender = JSON.parse(JSON.stringify(doc.record.tender));
     const tenderData = JSON.parse(JSON.stringify(req.body));
-    // console.log('tenderData: ', tenderData);
 
     if (tenderData.tenderers.length !== 0) {
       tenderData.numberOfTenderers = tenderData.tenderers.length;
