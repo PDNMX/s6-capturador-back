@@ -42,6 +42,10 @@ class Record {
       nQuery = { ...nQuery, ['planning.budget.project']: this.queryString(query.title_project) };
     }
 
+    if (query.institution) {
+      nQuery = { ...nQuery, ['institution']: query.institution };
+    }
+
     console.log('nQuery: ', JSON.stringify(nQuery));
 
     return { query: nQuery, options: ops };
@@ -64,7 +68,6 @@ class Record {
 
   static getById = async (req: IDataUpdate) => {
     const recordId = req.id;
-    console.log('recordId: ', recordId);
 
     try {
       let record = await RecordModel.findById(recordId);
@@ -95,7 +98,6 @@ class Record {
 
   static insert = async (req: IDataUpdate) => {
     const data: IRecord = req.data;
-    console.log('data: ', data);
 
     if (!data) {
       throw new CustomError('record_1006', '{insert} No existen datos para insertar', 501);

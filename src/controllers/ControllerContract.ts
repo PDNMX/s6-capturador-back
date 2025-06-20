@@ -35,8 +35,6 @@ class ControllerContracts {
     const contractValueData = req.body;
     try {
       await itemContractData.validate(contractValueData);
-      console.log('hola desde el back');
-      console.log(contractValueData);
       res.send({ messg: 'todo muy bien' });
     } catch (err: any) {
       throw new ClientError('Contracts_8002', 'Error en la consulta enviada', `${err.path}: ${err.errors}`);
@@ -51,7 +49,6 @@ class ControllerContracts {
     //delete req.body.id;
     //const { body } = req;
     const { body } = req;
-    console.log('body desde insertData en controllerContract', body);
     const data = await Record.insert(body);
 
     res.json(data);
@@ -61,8 +58,6 @@ class ControllerContracts {
     /* const data = await ContractModel.getStatus(req);
     res.json(data); */
     let body = req.body;
-    // Corrigiendo la sintaxis de res.send()
-    //console.log("body", body );
     res.send({
       body
     });
@@ -138,7 +133,6 @@ class ControllerContracts {
  */
 
   static updateData = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('body desde updateData en controllerContract', req.body);
     const { body } = req;
     const data = await Record.update(body);
 
@@ -149,7 +143,6 @@ class ControllerContracts {
     const id = req.params.id;
 
     const contractsData = JSON.parse(JSON.stringify(req.body));
-    console.log('contractsData: ', JSON.stringify(contractsData, null, 2));
 
     const data = await Record.update({ id, data: { ...contractsData } });
 

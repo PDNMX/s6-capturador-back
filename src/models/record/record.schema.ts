@@ -15,6 +15,10 @@ let ocid = config.ocid;
 
 const RecordSchema: Schema<IRecord> = new mongoo.Schema({
   id: String,
+  institution: {
+    type: Schema.ObjectId,
+    ref: 'Institution'
+  },
   ocid: {
     type: String,
     default: () => `${ocid}-${new Types.ObjectId().toString()}`

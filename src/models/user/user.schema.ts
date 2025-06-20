@@ -17,22 +17,39 @@ const UserSchema: Schema = new Schema<IUser>(
       type: String,
       trim: true
     },
-    institucion: {
-      type: String,
-      required: true,
-      enum: ['Institución1', 'Institución2', 'Institución3'] // Ajusta según tu catálogo
+    institution: {
+      type: Schema.Types.ObjectId,
+      ref: 'Institutions',
+      required: true
     },
-    roles: [
-      {
-        type: String,
-        enum: ['admin', 'usuario', 'editor'] // Ajusta según necesites
-      }
-    ],
     estatus: {
       type: String,
       required: true,
       enum: ['activo', 'inactivo'],
       default: 'activo'
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    scope: [
+      {
+        type: String,
+        required: true,
+        enum: ['admin', 'usuario', 'read']
+      }
+    ],
+    client_id: {
+      type: String,
+      required: true
+    },
+    client_secret: {
+      type: String,
+      required: true
     }
   },
   {
@@ -40,4 +57,4 @@ const UserSchema: Schema = new Schema<IUser>(
   }
 );
 
-export const UserModel = model<IUser>('User', UserSchema);
+export const UserModel = model<IUser>('Oauth', UserSchema);
