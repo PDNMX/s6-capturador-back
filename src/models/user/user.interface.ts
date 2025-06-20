@@ -10,7 +10,7 @@ interface IUser extends Document {
   nombre: string;
   primerApellido: string;
   segundoApellido?: string;
-  institucion: IInstitution;  
+  institution: IInstitution;  
   estatus: 'activo' | 'inactivo';
   createdAt: Date;
   updatedAt: Date;

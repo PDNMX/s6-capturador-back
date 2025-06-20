@@ -17,7 +17,7 @@ const UserSchema: Schema = new Schema<IUser>(
       type: String,
       trim: true
     },
-    institucion: {
+    institution: {
       type: Schema.Types.ObjectId,
       ref: 'Institutions',
       required: true

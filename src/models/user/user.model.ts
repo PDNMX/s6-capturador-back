@@ -25,6 +25,20 @@ class Users {
     }
   };
 
+  static getUserByUsername = async (username: string) => {
+    try {
+      const user = await UserModel.find({ username });
+
+      if (!user) {
+        throw new Error(`No se encontró un usuario con el username: ${username}`);
+      }
+
+      return user[0];
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  };
+
   static getUserByID = async (req: Request) => {
     try {
       const id = req.params.id;
