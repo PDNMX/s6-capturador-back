@@ -6,6 +6,7 @@ class Users {
   static addUser = async (req: Request) => {
     try {
       const { data } = req.body;
+      data.scope.push('read');
       const newUser = new UserModel({ ...data });
       const savedUser = await newUser.save();
 
@@ -44,7 +45,7 @@ class Users {
     try {
       const id = req.params.id;
       const { data } = req.body;
-
+      data.scope.push('read');
       const updatedUser = await UserModel.findByIdAndUpdate(id, data, { new: true, runValidators: true });
 
       if (!updatedUser) {
