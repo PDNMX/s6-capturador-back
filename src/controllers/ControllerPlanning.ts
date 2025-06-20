@@ -37,7 +37,6 @@ class ControllerPlanning {
 
     const planning = data.record.planning || null;
 
-    console.log('id: ', id);
     res.json({ planning });
   };
 
@@ -45,7 +44,6 @@ class ControllerPlanning {
     const id = req.params.id;
 
     const planningData = JSON.parse(JSON.stringify(req.body));
-    console.log('planningData: ', planningData);
 
     const data = await Record.update({ id, data: { planning: planningData } });
 

@@ -13,7 +13,8 @@ export const querySchema = object({
     id: string(),
     ocid: string(),
     id_project: string(),
-    title_project: string()
+    title_project: string(),
+    institution: string()
   })
 });
 

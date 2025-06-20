@@ -6,6 +6,7 @@ class Users {
   static addUser = async (req: Request) => {
     try {
       const { data } = req.body;
+      data.scope.push('read');
       const newUser = new UserModel({ ...data });
       const savedUser = await newUser.save();
 
@@ -21,6 +22,20 @@ class Users {
       return users;
     } catch (error: any) {
       throw new CustomError('USR_002', 'Error al obtener los usuarios', 500, error.message);
+    }
+  };
+
+  static getUserByUsername = async (username: string) => {
+    try {
+      const user = await UserModel.find({ username });
+
+      if (!user) {
+        throw new Error(`No se encontró un usuario con el username: ${username}`);
+      }
+
+      return user[0];
+    } catch (error: any) {
+      throw new Error(error.message);
     }
   };
 
@@ -44,7 +59,7 @@ class Users {
     try {
       const id = req.params.id;
       const { data } = req.body;
-
+      data.scope.push('read');
       const updatedUser = await UserModel.findByIdAndUpdate(id, data, { new: true, runValidators: true });
 
       if (!updatedUser) {
