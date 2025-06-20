@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { IInstitution } from './institution.interface';
 
 const AddressSchema: Schema = new Schema(
@@ -17,4 +17,4 @@ const InstitutionSchema: Schema = new Schema<IInstitution>({
   address: { type: AddressSchema, required: true }
 });
 
-export const InstitutionModel = mongoose.model<IInstitution>('Institution', InstitutionSchema);
+export const InstitutionModel = model<IInstitution>('Institution', InstitutionSchema);
