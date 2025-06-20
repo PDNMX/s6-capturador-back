@@ -42,6 +42,10 @@ class Record {
       nQuery = { ...nQuery, ['planning.budget.project']: this.queryString(query.title_project) };
     }
 
+    if (query.institution) {
+      nQuery = { ...nQuery, ['institution']: query.institution };
+    }
+
     console.log('nQuery: ', JSON.stringify(nQuery));
 
     return { query: nQuery, options: ops };
