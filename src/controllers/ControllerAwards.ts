@@ -55,7 +55,6 @@ class ControllerAwards {
     const id = req.params.id;
 
     const awardsData = JSON.parse(JSON.stringify(req.body));
-    console.log("awardsData: ", awardsData);
 
   
     const data = await Record.update({ id, data: { ...awardsData } });

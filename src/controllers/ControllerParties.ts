@@ -44,7 +44,6 @@ class ControllerParties {
     // const doc = await Record.getById({ id, data: null });
     // const oldParties = JSON.parse(JSON.stringify(doc.record.parties));
     const partiesData = JSON.parse(JSON.stringify(req.body));
-    console.log('partiesData: ', partiesData);
 
     // const newParties = { ...oldParties, ...partiesData };
 
