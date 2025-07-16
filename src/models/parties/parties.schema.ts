@@ -15,7 +15,7 @@ const BeneficialOwnersSchema: Schema = new mongoo.Schema({
     id: String
   },
 
-  nationality: String,
+  nationalities: [String],
   email: String,
   telephone: String,
   faxNumber: String,
