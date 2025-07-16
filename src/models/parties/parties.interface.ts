@@ -6,7 +6,7 @@ interface IBeneficialOwners {
     id: string;
   };
 
-  nationality: string;
+  nationalities: [string];
   email: string;
   telephone: string;
   faxNumber: string;
